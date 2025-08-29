@@ -11,34 +11,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-print("========== DEBUG: FILE SYSTEM ==========")
-
-# Current working directory
-print("Working directory:", os.getcwd())
-
-# List all items in the current working directory
-print("Files/Folders in cwd:", os.listdir(os.getcwd()))
-
-# Walk the directory tree (just top 2 levels for readability)
-for root, dirs, files in os.walk(".", topdown=True):
-    level = root.count(os.sep)
-    indent = " " * 4 * level
-    print(f"{indent}{root}/")
-    subindent = " " * 4 * (level + 1)
-    for f in files:
-        print(f"{subindent}{f}")
-    if level > 1:  # stop after 2 levels deep
-        break
-
-# Try to access your predictions folder directly
-predictions_folder = "2025 Weekly Predictions"
-if os.path.exists(predictions_folder):
-    print(f"Contents of '{predictions_folder}':", os.listdir(predictions_folder))
-else:
-    print(f"'{predictions_folder}' NOT FOUND in repo root")
-
-print("========================================")
-
 # ---------------------------
 # Config
 # ---------------------------
@@ -395,6 +367,7 @@ all_teams = sorted(pd.unique(df[["Home Team", "Away Team"]].values.ravel('K')))
 # App + Layout
 # ---------------------------
 app = Dash(__name__, external_stylesheets=[THEME], suppress_callback_exceptions=True)
+server = app.server
 app.title = TITLE
 
 # Filters card (only used on first page)
@@ -954,4 +927,4 @@ def display_page(pathname):
 # Main
 # ---------------------------
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0', port=8040)
