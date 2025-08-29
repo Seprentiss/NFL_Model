@@ -1,7 +1,6 @@
 pandas==2.0.3
-numpy==2.1.1        # (assuming this is still the latest stable version)
-dash==2.18.2        # (assuming this remains current)
+numpy==1.24.4
+dash==2.14.0
 dash-bootstrap-components==1.6.0
-plotly==5.24.1
-# Optional for deployment:
-gunicorn==21.0.0    # or latest available
+plotly==5.17.0
+gunicorn==19.7.1
