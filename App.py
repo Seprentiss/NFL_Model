@@ -7,12 +7,16 @@ import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import numpy as np
 from dash import html, dcc
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ---------------------------
 # Config
 # ---------------------------
 CSV_PATH = os.environ.get(
-    "PREDICTIONS_CSV", "2025 Weekly Predictions/Week 1 Predictions_Full_Season.csv"
+    "PREDICTIONS_CSV",
+    os.path.join(BASE_DIR, "2025 Weekly Predictions", "Week 1 Predictions_Full_Season.csv")
 )
 TITLE = "Game Predictions Dashboard"
 THEME = dbc.themes.DARKLY
@@ -42,10 +46,10 @@ df["Spread Edge"] = abs(df["Home Team Projected Spread"] - df["Home Team Vegas S
 
 df["Win% Differential"] = (df["Home Win %"] - df["Away Win %"]).abs()
 
-qb_df = pd.read_csv("Player Stats/2024/22/qb_data.csv")
-rb_df = pd.read_csv("Player Stats/2024/22/rb_data.csv")
-wr_df = pd.read_csv("Player Stats/2024/22/wr_data.csv")
-te_df = pd.read_csv("Player Stats/2024/22/te_data.csv")
+qb_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats","2024","22","qb_data.csv"))
+rb_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats","2024","22","rb_data.csv"))
+wr_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats","2024","22","wr_data.csv"))
+te_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats","2024","22","te_data.csv"))
 
 def add_waa(df):
     # Calculate WAA based on top 32 players at this position
