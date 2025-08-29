@@ -1,4 +1,4 @@
-pandas==2.3.2
+pandas==2.0.3
 numpy==2.1.1        # (assuming this is still the latest stable version)
 dash==2.18.2        # (assuming this remains current)
 dash-bootstrap-components==1.6.0
