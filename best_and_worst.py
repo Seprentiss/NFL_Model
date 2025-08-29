@@ -9,16 +9,16 @@ for season in range(1999,2020):
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-for season in range(2020,2023):
+for season in range(2020,2025):
     directory_path = f"Team Stats/{season}/{22}/Net_Ratings.csv"
     data = pd.read_csv(directory_path)
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-directory_path = f"Team Stats/{2023}/{22}/Net_Ratings.csv"
-data = pd.read_csv(directory_path)
-for team in data.columns.values:
-    teams_dict[f"{team} ( {2023} )"] = round(data[team].iloc[0], 3)
+# directory_path = f"Team Stats/{2025}/{22}/Net_Ratings.csv"
+# data = pd.read_csv(directory_path)
+# for team in data.columns.values:
+#     teams_dict[f"{team} ( {2023} )"] = round(data[team].iloc[0], 3)
 
 
 sorted_teams_dict = dict(sorted(teams_dict.items(), key=lambda x: x[1], reverse=True))
@@ -39,16 +39,16 @@ for season in range(1999,2020):
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-for season in range(2020,2023):
-    directory_path = f"Team Stats/{season}/{22}/Net_Ratings.csv"
+for season in range(2020,2025):
+    directory_path = f"Team Stats/{season}/{22}/Net_Off_Ratings.csv"
     data = pd.read_csv(directory_path)
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-directory_path = f"Team Stats/{2023}/{22}/Net_Off_Ratings.csv"
-data = pd.read_csv(directory_path)
-for team in data.columns.values:
-    teams_dict[f"{team} ( {2023} )"] = round(data[team].iloc[0], 3)
+# directory_path = f"Team Stats/{2023}/{22}/Net_Off_Ratings.csv"
+# data = pd.read_csv(directory_path)
+# for team in data.columns.values:
+#     teams_dict[f"{team} ( {2023} )"] = round(data[team].iloc[0], 3)
 
 
 sorted_teams_dict = dict(sorted(teams_dict.items(), key=lambda x: x[1], reverse=True))
@@ -69,16 +69,16 @@ for season in range(1999,2020):
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-for season in range(2020,2023):
-    directory_path = f"Team Stats/{season}/{22}/Net_Ratings.csv"
+for season in range(2020,2025):
+    directory_path = f"Team Stats/{season}/{22}/Net_Def_Ratings.csv"
     data = pd.read_csv(directory_path)
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-directory_path = f"Team Stats/{2023}/{22}/Net_Def_Ratings.csv"
-data = pd.read_csv(directory_path)
-for team in data.columns.values:
-    teams_dict[f"{team} ( {2023} )"] = round(data[team].iloc[0], 3)
+# directory_path = f"Team Stats/{2023}/{22}/Net_Def_Ratings.csv"
+# data = pd.read_csv(directory_path)
+# for team in data.columns.values:
+#     teams_dict[f"{team} ( {2023} )"] = round(data[team].iloc[0], 3)
 
 
 sorted_teams_dict = dict(sorted(teams_dict.items(), key=lambda x: x[1], reverse=True))

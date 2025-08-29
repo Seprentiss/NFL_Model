@@ -40,11 +40,57 @@ def CalcWinner(data, last_season_data, week, season, home_team, away_team, home_
         "HFA": hfa
     }
 
+def calculate_ev(mean, vegas_mean, cpev,home_team,away_team):
+    def ev_for_side(spread_line, vegas_thresh, flip):
+        if flip:
+            value = cpev[(cpev["true_line"] == spread_line) & (cpev["market_line"] == vegas_thresh)]['ev_roi'].values[0]
+            return value
+        else:
+            value = cpev[(cpev["true_line"] == spread_line) & (cpev["market_line"] == -vegas_thresh)][
+                'ev_roi'].values[0]
+            return value
+    # Spread lines (rounded to nearest 0.5)
+    spread_line_a = round(mean * 2) / 2
+    spread_line_b = round(-mean * 2) / 2
+    vegas_thresh = abs(vegas_mean)
+
+    # EV for model's favorite
+    flip_a = (mean >= 0)
+    ev_a = ev_for_side(spread_line_a, vegas_thresh, flip_a)*100
+
+    # EV for opponent (underdog)
+    flip_b = not flip_a
+    ev_b = ev_for_side(spread_line_b, vegas_thresh, flip_b)*100
+
+    # Determine max EV + team
+    if ev_a >= ev_b:
+        best_team = home_team
+        best_ev = ev_a
+    else:
+        best_team = away_team
+        best_ev = ev_b
+
+    # Output logic
+    if ev_a < 0 and ev_b < 0:
+        output = f"Do not bet no EV Advantage! Max EV is {round(best_ev,2)}% for {best_team}"
+        msg = f"\033[1;31mEV for Betting Spread ( Only Bet + EV ): {output}\033[0m"
+    elif ev_a > 0 and ev_b > 0:
+        output = f"Arbitrage EV Advantage! {round(ev_a,2)}%:{home_team}, {round(ev_b,2)}%:{away_team}"
+        msg = f"\033[1;32mEV for Betting Spread ( Only Bet + EV ): {output}\033[0m"
+    elif ev_a >= ev_b:
+        output = f"Bet the Home Team: {home_team}, {round(ev_a,2)}% EV"
+        msg = f"\033[32mEV for Betting Spread ( Only Bet + EV ): {output}\033[0m"
+    else:
+        output = f"Bet the Away Team: {away_team}, {round(ev_b,2)}% EV"
+        msg = f"\033[32mEV for Betting Spread ( Only Bet + EV ): {output}\033[0m"
+
+    return msg, best_team, round(best_ev, 2)
+
 
 def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_net, away_net, hfa):
     np.random.seed(42)
 
-    vegas_data = pd.read_csv(f"2024 Vegas Lines/Vegas_Lines_Week_{week}.csv")
+    vegas_data = pd.read_csv(f"{season} Vegas Lines/Vegas_Lines_Week_{week}.csv")
 
     # Extract data from the selected row
     home_team_dvoa = home_net + hfa
@@ -115,7 +161,7 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
 
     mean = np.mean(combined_samples)
 
-    cpev = pd.read_csv("Cover Prob EV.csv")
+    cpev = pd.read_excel("Cover Prob EV.xlsx", engine="openpyxl")
 
     # mean = np.mean(rounded_samples)
 
@@ -130,31 +176,33 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
             hw_hl = f"My Model Projects {away_team} to Win by {round(mean * 2) / 2} - Vegas has {away_team} as a {vegas_mean} Point Favorite"
         else:
             hw_hl = f"My Model Projects {away_team} to Win by {round(mean * -2) / 2} - Vegas has {home_team} as a {vegas_mean} Point Favorite"
-    # Home Team Favorite in both
-    if vegas_mean > 0:
-        if mean > 0:
-            ev = (sum(cpev[(cpev["spread_line"] == round(-mean * 2) / 2) & (cpev["result"] < -vegas_mean)][
-                          "normalized_modeled_prob"]) +
-                  sum(cpev[(cpev["spread_line"] == round(-mean * 2) / 2) & (cpev["result"] > -vegas_mean)][
-                          "normalized_modeled_prob"]) * -1.1) / 1.1
-        else:
-            ev = (sum(cpev[(cpev["spread_line"] == round(-mean * 2) / 2) & (cpev["result"] > -vegas_mean)][
-                          "normalized_modeled_prob"]) +
-                  sum(cpev[(cpev["spread_line"] == round(-mean * 2) / 2) & (cpev["result"] < -vegas_mean)][
-                          "normalized_modeled_prob"]) * -1.1) / 1.1
-    else:
-        if mean > 0:
-            ev = (sum(cpev[(cpev["spread_line"] == round(mean * 2) / 2) & (cpev["result"] > vegas_mean)][
-                          "normalized_modeled_prob"]) +
-                  sum(cpev[(cpev["spread_line"] == round(mean * 2) / 2) & (cpev["result"] < vegas_mean)][
-                          "normalized_modeled_prob"]) * -1.1) / 1.1
-        else:
-            ev = (sum(cpev[(cpev["spread_line"] == round(mean * 2) / 2) & (cpev["result"] < vegas_mean)][
-                          "normalized_modeled_prob"]) +
-                  sum(cpev[(cpev["spread_line"] == round(mean * 2) / 2) & (cpev["result"] > vegas_mean)][
-                          "normalized_modeled_prob"]) * -1.1) / 1.1
-
-    ev_percentage = round(ev * 100)
+    # # Home Team Favorite in both
+    # if vegas_mean > 0:
+    #     if mean > 0:
+    #         ev = (sum(cpev[(cpev["spread_line"] == round(-mean * 2) / 2) & (cpev["result"] < -vegas_mean)][
+    #                       "normalized_modeled_prob"]) +
+    #               sum(cpev[(cpev["spread_line"] == round(-mean * 2) / 2) & (cpev["result"] > -vegas_mean)][
+    #                       "normalized_modeled_prob"]) * -1.1) / 1.1
+    #     else:
+    #         ev = (sum(cpev[(cpev["spread_line"] == round(-mean * 2) / 2) & (cpev["result"] > -vegas_mean)][
+    #                       "normalized_modeled_prob"]) +
+    #               sum(cpev[(cpev["spread_line"] == round(-mean * 2) / 2) & (cpev["result"] < -vegas_mean)][
+    #                       "normalized_modeled_prob"]) * -1.1) / 1.1
+    # else:
+    #     if mean > 0:
+    #         ev = (sum(cpev[(cpev["spread_line"] == round(mean * 2) / 2) & (cpev["result"] > vegas_mean)][
+    #                       "normalized_modeled_prob"]) +
+    #               sum(cpev[(cpev["spread_line"] == round(mean * 2) / 2) & (cpev["result"] < vegas_mean)][
+    #                       "normalized_modeled_prob"]) * -1.1) / 1.1
+    #     else:
+    #         ev = (sum(cpev[(cpev["spread_line"] == round(mean * 2) / 2) & (cpev["result"] < vegas_mean)][
+    #                       "normalized_modeled_prob"]) +
+    #               sum(cpev[(cpev["spread_line"] == round(mean * 2) / 2) & (cpev["result"] > vegas_mean)][
+    #                       "normalized_modeled_prob"]) * -1.1) / 1.1
+    #
+    # ev_percentage = round(ev * 100)
+    print(mean,vegas_mean)
+    ev = calculate_ev(-mean,-vegas_mean, cpev,home_team,away_team)
 
     # Fancy output
     # print("┌" + "─" * 85 + "┐")
@@ -163,14 +211,19 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
     # print(f"│ {hw_hl}".ljust(85) + " │")
     # print("└" + "─" * 85 + "┘")
 
-    print("┌" + "─" * 85 + "┐")
-    if ev > 0:
-        print(f"│ \033[32mExpected Value for Betting Spread ( Only Bet + EV ): {ev_percentage}%\033[0m".ljust(94) + " │")  # Green text for the first line
-    else:
-        print(f"│ \033[31mExpected Value for Betting Spread ( Only Bet + EV ): {ev_percentage}%\033[0m".ljust(94) + " │")
-    print("├" + "─" * 85 + "┤")
-    print(f"│ {hw_hl}".ljust(85) + " │")
-    print("└" + "─" * 85 + "┘")
+    # print("┌" + "─" * 85 + "┐")
+    # if ev[0] > 0:
+    #     print(f"│ \033[32mExpected Value for Betting Spread ( Only Bet + EV ): {ev_percentage}%\033[0m".ljust(94) + " │")  # Green text for the first line
+    # else:
+    #     print(f"│ \033[31mExpected Value for Betting Spread ( Only Bet + EV ): {ev_percentage}%\033[0m".ljust(94) + " │")
+
+
+    print(f"{ev}")
+  # Green text for the first line
+
+    # print("├" + "─" * 85 + "┤")
+    print(f"{hw_hl}".ljust(85))
+    # print("└" + "─" * 85 + "┘")
 
     return {
         "Week": week,
@@ -179,12 +232,13 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
         "Away Team": away_team,
         "Home Team Projected Spread": -1*mean,
         "Home Team Vegas Spread": -1*vegas_mean,
-        "Expected Value (%)": ev_percentage,
+        "Expected Value (%)": ev[2],
+        "Expected Value Team": ev[1],
         "Home Team Spread Std": np.std(combined_samples)
     }
 
 
-season = 2024
+season = 2025
 
 schedule_data = pd.read_csv(f"Data/NFL_SCHEDULE_{season}.csv")
 url = f'https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season-1}.csv'
@@ -197,7 +251,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [18]
+weeks = [1]
 results = []
 
 Total_Wins = 0
@@ -206,8 +260,12 @@ for week in weeks:
     Week_Wins = 0
     Week_Loses = 0
     hfa = main.hfa(data, last_season_data, weeks_played=week)
+    if week > 18:
+        hfa += .0671
+    if week > 21:
+        hfa = 0
     print(f"HFA: {hfa}")
-    week_data = schedule_data[schedule_data["Week"] == week]
+    week_data = schedule_data[schedule_data["Week"] == str(week)]
     # print(week_data)
     for i in range(len(week_data)):
         home_team = main.getTeamAbv(week_data["HomeTm"].iloc[i])
@@ -244,15 +302,12 @@ for week in weeks:
             home_net = pd.read_csv(f"Team Stats/{season}/{week - 1}/Net_Ratings.csv")[home_team].iloc[0]
             away_net = pd.read_csv(f"Team Stats/{season}/{week - 1}/Net_Ratings.csv")[away_team].iloc[0]
 
-        QB_adj = {"ATL":-0.00504188034,"CLE":-0.02286752136,"PHI":-0.06409743589,"IND":-0.0072068376,"MIA":-0.05824786324,"BUF":-0.12082307692,"KC":-0.07854102564,"LA":-0.00577435897,"SF":-0.07786153846}
-        # QB_adj = {}
+        # QB_adj = {"PHI":0.03237606837}
+        QB_adj = {}
         if home_team in QB_adj:
             home_net+= QB_adj[home_team]
         if away_team in QB_adj:
             away_net+= QB_adj[away_team]
-
-        if week > 21:
-            hfa = 0
 
         if home_team not in []:
             win_result = CalcWinner(data, last_season_data, week, season, home_team, away_team, home_net, away_net, hfa)
@@ -266,7 +321,7 @@ for week in weeks:
 
         results.append(combined_result)
 
-    save_to_csv(f"2024 Weekly Predictions/Week {week} Predictions_Full_Season.csv", results)
+    save_to_csv(f"2025 Weekly Predictions/Week {week} Predictions_Full_Season.csv", results)
 
     #     if (home_net > away_net):
     #         if home_team == main.getTeamAbv(week_data["Winner/tie"].iloc[i]):

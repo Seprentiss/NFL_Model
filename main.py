@@ -208,12 +208,12 @@ def first_week_hfa(data):
 
         if data["home_team"].iloc[i] == data["posteam"].iloc[i]:
             total_home_epa += epa
-        else:
+        elif data["home_team"].iloc[i] == data["defteam"].iloc[i]:
             total_home_epa += (epa * -1)
 
         if data["away_team"].iloc[i] == data["posteam"].iloc[i]:
             total_away_epa += epa
-        else:
+        elif data["away_team"].iloc[i] == data["defteam"].iloc[i]:
             total_away_epa += (epa * -1)
 
     # Calculate home field advantage
@@ -245,14 +245,14 @@ def hfa(data,last_season_data,weeks_played=1):
             epa = week_data["epa"].iloc[i]
             if week_data["home_team"].iloc[i] == week_data["posteam"].iloc[i]:
                 total_home_epa += epa
-            else:
+            elif data["home_team"].iloc[i] == data["defteam"].iloc[i]:
                 total_home_epa += (epa * -1)
 
         for i in range(len(week_data)):
             epa = week_data["epa"].iloc[i]
             if week_data["away_team"].iloc[i] == week_data["posteam"].iloc[i]:
                 total_away_epa += epa
-            else:
+            elif data["away_team"].iloc[i] == data["defteam"].iloc[i]:
                 total_away_epa += epa * -1
 
     if weeks_played < 14:
@@ -751,13 +751,13 @@ def createNflScheduleData(season):
                 data['VisTm'].iloc[i] = data['Loser/tie'].iloc[i]
 
             if data["Week"].iloc[i] == "WildCard":
-                data["Week"].iloc[i] = 18
-            if data["Week"].iloc[i] == "Division":
                 data["Week"].iloc[i] = 19
-            if data["Week"].iloc[i] == "ConfChamp":
+            if data["Week"].iloc[i] == "Division":
                 data["Week"].iloc[i] = 20
-            if data["Week"].iloc[i] == "SuperBowl":
+            if data["Week"].iloc[i] == "ConfChamp":
                 data["Week"].iloc[i] = 21
+            if data["Week"].iloc[i] == "SuperBowl":
+                data["Week"].iloc[i] = 22
 
         data = data[(data['Date'] != "Playoffs") & (data['Week'] != "Week")]
         data.to_csv(f"Data/NFL_SCHEDULE_{season}.csv", index=False)
@@ -768,14 +768,14 @@ if __name__ == '__main__':
 
     full_start = time.time()
 
-    for season in [2024]:
+    for season in [2025]:
         createNflScheduleData(season)
 
         url = f'https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.csv'
 
         data = pd.read_csv(url, low_memory=True)
 
-        for week in range(19,20):
+        for week in range(1,2):
 
             print("Adjusting Team Stats...")
 

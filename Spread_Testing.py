@@ -13,7 +13,7 @@ def save_to_csv(file_name, results):
 def CalcSpread(week, season, home_team, away_team, home_net, away_net,htvar,atvar, hfa):
     np.random.seed(42)
 
-    vegas_data = pd.read_csv(f"Vegas_Lines_Week_{week}.csv")
+    vegas_data = pd.read_csv(f"{season} Vegas Lines/Vegas_Lines_Week_{week}.csv")
 
     # Extract data from the selected row
     home_team_dvoa = home_net + hfa
@@ -121,12 +121,12 @@ def CalcSpread(week, season, home_team, away_team, home_net, away_net,htvar,atva
         "Home Team Vegas Spread": -1*vegas_mean,
         "Home Team Spread Std": np.std(combined_samples)
     }
+season = 2024
 
-
-weeks = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+weeks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
 for week in weeks:
     results = []
-    data = pd.read_csv(f"Week {week} Predictions_Full_Season.csv")
+    data = pd.read_csv(f"{season} Weekly Predictions/Week {week} Predictions_Full_Season.csv")
     for i in range(len(data)):
         spread_result = CalcSpread(week, 2024, data["Home Team"].iloc[i], data["Away Team"].iloc[i], data['Home Team Str Mean'].iloc[i],
                                    data['Away Team Str Mean'].iloc[i],data['Home Team Str Var'].iloc[i],data['Away Team Str Var'].iloc[i],
@@ -134,4 +134,4 @@ for week in weeks:
 
         results.append(spread_result)
 
-    save_to_csv(f"Week {week} Predictions_Full_Season_Spread_Testing.csv", results)
+    save_to_csv(f"2024 Weekly Predictions/Week {week} Predictions_Full_Season_Spread_Testing_Unadjusted.csv", results)
