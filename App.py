@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # ---------------------------
 CSV_PATH = os.environ.get(
     "PREDICTIONS_CSV",
-    os.path.join(BASE_DIR, "2025 Weekly Predictions", "Week 1 Predictions_Full_Season.csv")
+    os.path.join(BASE_DIR, "2025_Weekly_Predictions", "Week_1_Predictions_Full_Season.csv")
 )
 TITLE = "Game Predictions Dashboard"
 THEME = dbc.themes.DARKLY
