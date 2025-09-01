@@ -8,19 +8,59 @@ import plotly.graph_objects as go
 import numpy as np
 from dash import html, dcc
 import os
+import glob
 
+player_season = '2024'
+player_week = '22'
+ratings_season = '2025'
+ratings_week = '1'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+def create_master_predictions(folder_path, file_type="csv"):
+    """
+    Reads all weekly prediction files in a folder and combines them into a single master file.
+
+    Parameters:
+        folder_path (str): Path to the folder containing the weekly prediction files.
+        file_type (str): "csv" (default) or "excel" depending on your file type.
+
+    Returns:
+        pd.DataFrame: The combined master DataFrame.
+    """
+    # Pattern to match all your weekly prediction files
+    file_pattern = os.path.join(folder_path, f"Week_*_Predictions_Full_Season.{file_type}")
+
+    # List all files matching the pattern
+    all_files = glob.glob(file_pattern)
+
+    # Sort files by week number
+    all_files.sort(key=lambda x: int(x.split('Week_')[1].split('_')[0]))
+
+    # Read and concatenate all files
+    if file_type == "csv":
+        df_list = [pd.read_csv(f) for f in all_files]
+        master_df = pd.concat(df_list, ignore_index=True)
+        master_df.to_csv(os.path.join(folder_path, "Master_Predictions_Full_Season.csv"), index=False)
+    elif file_type in ["xls", "xlsx", "excel"]:
+        df_list = [pd.read_excel(f) for f in all_files]
+        master_df = pd.concat(df_list, ignore_index=True)
+        master_df.to_excel(os.path.join(folder_path, "Master_Predictions_Full_Season.xlsx"), index=False)
+    else:
+        raise ValueError("file_type must be 'csv' or 'excel'")
+
+    print(f"Master file created with {len(master_df)} rows.")
+    return master_df
+
+# create_master_predictions("2025_Weekly_Predictions", file_type="csv")
 # ---------------------------
 # Config
 # ---------------------------
 CSV_PATH = os.environ.get(
     "PREDICTIONS_CSV",
-    os.path.join(BASE_DIR, "2025_Weekly_Predictions", "Week_1_Predictions_Full_Season.csv")
+    os.path.join(BASE_DIR, f"{ratings_season}_Weekly_Predictions", f"Master_Predictions_Full_Season.csv")
 )
 TITLE = "Game Predictions Dashboard"
 THEME = dbc.themes.DARKLY
-
 
 
 # ---------------------------
@@ -46,21 +86,155 @@ df["Spread Edge"] = abs(df["Home Team Projected Spread"] - df["Home Team Vegas S
 
 df["Win% Differential"] = (df["Home Win %"] - df["Away Win %"]).abs()
 
-qb_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats","2024","22","qb_data.csv"))
-rb_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats","2024","22","rb_data.csv"))
-wr_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats","2024","22","wr_data.csv"))
-te_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats","2024","22","te_data.csv"))
+qb_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats",f"{player_season}",f"{player_week}","qb_data.csv"))
+rb_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats",f"{player_season}",f"{player_week}","rb_data.csv"))
+wr_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats",f"{player_season}",f"{player_week}","wr_data.csv"))
+te_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats",f"{player_season}",f"{player_week}","te_data.csv"))
 
-def add_waa(df):
-    # Calculate WAA based on top 32 players at this position
-    top32_avg_epa = df['EPA per Play ( all offense )'].nlargest(32).mean()
-    df['WAA'] = (df['EPA per Play ( all offense )'] * 33.146 + 8.3641) - (top32_avg_epa * 33.146 + 8.3641)
+# def add_WAR(df):
+#     # Calculate WAR based on top 32 players at this position
+#     top32_avg_epa = df['EPA per Play ( all offense )'].nsmallest(len(df) // 2).mean()
+#     df['WAR'] = (df['EPA per Play ( all offense )'] * 33.146 + 8.3641) - (top32_avg_epa * 33.146 + 8.3641)
+#     return df
+#
+# qb_df = add_WAR(qb_df)
+# rb_df = add_WAR(rb_df)
+# wr_df = add_WAR(wr_df)
+# te_df = add_WAR(te_df)
+
+def add_WAR_global(df, all_players, total_wins, cap_share=0.35, position_col="POS"):
+    """
+    Calculate Wins Above Replacement (WAR), scaled by position.
+
+    - Players are only compared to others at their position
+    - WAR shares by position are based on abs(EPA) + avg EPA per player
+    - QB+RB+WR+TE combined capped at `cap_share` (default 40%)
+    - Unused share is left unused
+    """
+
+    df = df.copy()
+    all_players = all_players.copy()
+
+    # --- Estimate plays ---
+    df['est_plays'] = df['Total EPA'] / df['EPA per Play ( all offense )']
+    df['est_plays'] = df['est_plays'].replace([np.inf, -np.inf], np.nan).fillna(0)
+
+    all_players['est_plays'] = all_players['Total EPA'] / all_players['EPA per Play ( all offense )']
+    all_players['est_plays'] = all_players['est_plays'].replace([np.inf, -np.inf], np.nan).fillna(0)
+
+    # --- Wins per full-time starter ---
+    df['wins_per_fulltime'] = df['EPA per Play ( all offense )'] * 33.146 + 8.3641
+    baseline_plays = df['est_plays'].mean()
+    df['wins_scaled'] = df['wins_per_fulltime'] * (df['est_plays'] / baseline_plays)
+
+    # --- Replacement level within this position (bottom 20%) ---
+    pos = df[position_col].iloc[0]
+    pos_players = all_players[all_players[position_col] == pos]
+
+    repl_thr = pos_players['EPA per Play ( all offense )'].quantile(0.20)
+    repl_wins = (repl_thr * 33.146 + 8.3641)
+
+    df['replacement_level'] = repl_wins * (df['est_plays'] / baseline_plays)
+    df['WAR_raw'] = df['wins_scaled'] - df['replacement_level']
+
+    # --- Compute positional weights ---
+    pos_abs_epa = all_players.groupby(position_col)['Total EPA'].apply(lambda x: x.abs().sum())
+    pos_avg_epa = all_players.groupby(position_col)['Total EPA'].apply(lambda x: x.abs().mean())
+    pos_weights = pos_abs_epa * pos_avg_epa
+    pos_share = pos_weights / pos_weights.sum()
+
+
+    # --- Cap skill positions at `cap_share` ---
+    skill_positions = ["QB", "RB", "WR", "TE"]
+    skill_total_share = pos_share.loc[pos_share.index.intersection(skill_positions)].sum()
+
+    if skill_total_share > cap_share:
+        scale_factor = cap_share / skill_total_share
+        pos_share.loc[skill_positions] *= scale_factor
+
+
+    # print("\nPositional Weights (share of WAR allocation):")
+    # for p, w in pos_share.items():
+    #     print(f"{p}: {w:.3f}  ({w * 100:.1f}%)")
+
+    # --- Allocate WAR budget to this position ---
+    pos_share_value = pos_share.get(pos, 0)
+    target_wins_pos = total_wins * pos_share_value
+
+    raw_sum = df['WAR_raw'].sum()
+    scaling_factor = target_wins_pos / raw_sum if raw_sum > 0 else 0
+
+
+    df['WAR'] = df['WAR_raw'] * scaling_factor
+
+    return df
+# --- Usage ---
+all_players = pd.concat([qb_df, rb_df, wr_df, te_df], ignore_index=True)
+
+schedule_data = pd.read_csv(f"Data/NFL_SCHEDULE_{player_season}.csv")
+total_wins = len(schedule_data[schedule_data["Week"] <= int(player_week)])
+qb_df = add_WAR_global(qb_df, all_players,total_wins)
+rb_df = add_WAR_global(rb_df, all_players,total_wins)
+wr_df = add_WAR_global(wr_df, all_players,total_wins)
+te_df = add_WAR_global(te_df, all_players,total_wins)
+
+
+
+# Combine all positions
+all_players = pd.concat([qb_df, rb_df, wr_df, te_df], ignore_index=True)
+
+
+def add_PAAS(df, all_players, position_col="POS", starters_per_pos=None):
+    """
+    Calculate Points Above Average Starter (PAAS) using total EPA and EPA per offensive play,
+    relative to a positional starter baseline.
+
+    df: DataFrame for a single position
+    all_players: DataFrame of all players across positions
+    position_col: column name with position labels
+    starters_per_pos: dict, e.g. {"QB": 32, "RB": 64, "WR": 64, "TE": 32}
+    """
+    df = df.copy()
+    all_players = all_players.copy()
+
+    # --- Estimate plays ---
+    all_players['est_plays'] = all_players['Total EPA'] / all_players['EPA per Play ( all offense )']
+    df['est_plays'] = df['Total EPA'] / df['EPA per Play ( all offense )']
+
+    # Clean up infinities / missing
+    all_players['est_plays'] = all_players['est_plays'].replace([float('inf'), -float('inf')], 0).fillna(0)
+    df['est_plays'] = df['est_plays'].replace([float('inf'), -float('inf')], 0).fillna(0)
+
+    # --- Positional baseline ---
+    pos = df[position_col].iloc[0]  # assume one position per df
+    pos_players = all_players[all_players[position_col] == pos]
+
+    if starters_per_pos is not None and pos in starters_per_pos:
+        n_starters = starters_per_pos[pos]
+    else:
+        n_starters = 32  # default if not provided
+
+    # Baseline EPA per play of starter-level player at this position
+    baseline_epa_per_play = pos_players['EPA per Play ( all offense )'].nlargest(n_starters).mean()
+
+    # Baseline total contribution = baseline EPA per play × estimated plays
+    baseline_total_epa = baseline_epa_per_play * df['est_plays'].mean()
+
+    # Player total contribution = EPA per play × estimated plays
+    df['player_total_epa'] = df['EPA per Play ( all offense )'] * df['est_plays']
+
+    # PAAS = value above positional starter
+    df['PAAS'] = df['player_total_epa'] - baseline_total_epa
+
     return df
 
-qb_df = add_waa(qb_df)
-rb_df = add_waa(rb_df)
-wr_df = add_waa(wr_df)
-te_df = add_waa(te_df)
+# Define starter counts per position
+starters = {"QB": 32, "RB": 64, "WR": 64, "TE": 32}
+
+qb_df = add_PAAS(qb_df, all_players, starters_per_pos=starters)
+rb_df = add_PAAS(rb_df, all_players, starters_per_pos=starters)
+wr_df = add_PAAS(wr_df, all_players, starters_per_pos=starters)
+te_df = add_PAAS(te_df, all_players, starters_per_pos=starters)
 
 # Example mock player data
 players = {
@@ -111,11 +285,13 @@ def create_player_card(player):
                     html.Div([
                         html.P(f"Total EPA: {round(player['Total EPA'],2)}", className="mb-1"),
                         html.P(f"EPA per Play: {round(player['EPA per Play ( all offense )'],2)}", className="mb-1"),
-                        html.P(f"WAA: {player['WAA']:.2f}", className="mb-1")
+                        html.P(f"WAR: {player['WAR']:.2f}", className="mb-1"),
+                        html.P(f"PAAS: {player['PAAS']:.2f}", className="mb-1")
                     ]),
                     width=6,
                     style={"textAlign": "right"}
                 ),
+
             ],
             className="g-0 align-items-center"
         ),
@@ -361,6 +537,7 @@ def matchup_row(r):
 df["Matchup"] = df.apply(matchup_row, axis=1)
 
 weeks = sorted(df["Week"].dropna().unique().tolist())
+
 all_teams = sorted(pd.unique(df[["Home Team", "Away Team"]].values.ravel('K')))
 
 # ---------------------------
@@ -385,13 +562,13 @@ controls_card = dbc.Card(
                     dcc.Dropdown(
                         id="week-dd",
                         options=[{"label": int(w), "value": int(w)} for w in weeks],
-                        value=weeks[0] if weeks else None,
+                        value=weeks[len(weeks)-1] if weeks else None,
                         clearable=False,
                         style={"backgroundColor": "white", "color": "#013080"}
                     ),
                 ], md=4),
                 dbc.Col([
-                    dbc.Label("Team filter (optional)", style={"color": "#AAAAAA"}),
+                    dbc.Label("Team Filter", style={"color": "#AAAAAA"}),
                     dcc.Dropdown(
                         id="team-dd",
                         options=[{"label": t, "value": t} for t in all_teams],
@@ -502,10 +679,25 @@ power_rankings_controls_card = dbc.Card(
         dbc.CardBody(
             dbc.Row(
                 [
+                    dbc.Col(
+                        [
+                            dbc.Label("Week", style={"color": "#AAAAAA"}),
+                            dcc.Dropdown(
+                                id="power-week-dd",
+                                options=[{"label": int(w), "value": int(w)} for w in weeks],
+                                value=weeks[len(weeks)-1] if weeks else None,
+                                multi=False,
+                                clearable=False,
+                                placeholder="Filter by week...",
+                                style={"backgroundColor": "white", "color": "#013080"}
+                            ),
+                        ],
+                        width=6
+                    ),
                     # Team filter
                     dbc.Col(
                         [
-                            dbc.Label("Filter by Team", style={"color": "#AAAAAA"}),
+                            dbc.Label("Team Filter", style={"color": "#AAAAAA"}),
                             dcc.Dropdown(
                                 id="power-team-dd",
                                 options=[{"label": t, "value": t} for t in all_teams],
@@ -536,6 +728,7 @@ def navbar():
             dbc.NavLink("Game Predictions", href="/", active="exact", id="nav-home"),
             dbc.NavLink("Power Rankings", href="/power-rankings", active="exact", id="nav-power"),
             dbc.NavLink("Player Rankings", href="/player-rankings", active="exact", id="nav-player"),
+            dbc.NavLink("Glossary", href="/glossary", active="exact", id="nav-glossary"),
         ],
         pills=True,  # makes it look like tabs
         justified=True,
@@ -591,6 +784,103 @@ player_page = dbc.Container([
     # layout,
 ], fluid=True, style={"backgroundColor": "#111"})
 
+glossary_page = dbc.Container([
+    html.H2("Glossary", className="mt-3 mb-2 text-light"),
+    navbar(),
+
+    # Home Page
+    dbc.Card([
+        dbc.CardHeader("Home Page", className="text-light bg-primary"),
+        dbc.CardBody([
+            html.P("The Home Page displays weekly game predictions, allowing users to filter by week or team and sort results. It is designed to identify betting edges and highlight where the model’s projections differ from sportsbook lines."),
+            html.Ul([
+                html.Li([
+                    html.B("Expected Value (%): "),
+                    "Represents the long-term profitability of a bet.",
+                    html.Ul([
+                        html.Li("Calculated by comparing the model’s win probability to the implied probability from sportsbook odds.")
+                    ])
+                ]),
+                html.Li([
+                    html.B("Spread Edge: "),
+                    "Measures how much the model’s projected point spread differs from the Vegas line.",
+                    html.Ul([
+                        html.Li("Positive values suggest value on the model’s favored team.")
+                    ])
+                ]),
+                html.Li([
+                    html.B("Win% Differential: "),
+                    "The gap between the home and away team’s win probabilities.",
+                    html.Ul([
+                        html.Li("Shows how evenly matched a game is.")
+                    ])
+                ]),
+                html.Li([
+                    html.B("Matchup Chart: "),
+                    "Visual representation of team strength distributions, adjusted for home-field advantage.",
+                    html.Ul([
+                        html.Li("Uses probability curves to show where each team’s outcomes overlap.")
+                    ])
+                ])
+            ])
+        ])
+    ], className="mb-3"),
+
+    # Power Rankings Page
+    dbc.Card([
+        dbc.CardHeader("Power Rankings Page", className="text-light bg-primary"),
+        dbc.CardBody([
+            html.P("The Power Rankings page ranks teams based on efficiency metrics rather than just win-loss records. It reflects true team strength across offense, defense, and schedule difficulty."),
+            html.Ul([
+                html.Li([
+                    html.B("Score: "),
+                    "Model-based rating derived from performance and underlying efficiency. Accounts for current results, strength of schedule, and expected performance.",
+                    html.Ul([
+                        html.Li("Higher scores = stronger teams. An average team would be 0.")
+                    ])
+                ]),
+                html.Li([
+                    html.B("Wins: "),
+                    "Projected season win totals based on Team Score."
+                ])
+            ])
+        ])
+    ], className="mb-3"),
+
+    # Player Rankings Page
+    dbc.Card([
+        dbc.CardHeader("Player Rankings Page", className="text-light bg-primary"),
+        dbc.CardBody([
+            html.P("The Player Rankings page evaluates quarterbacks, running backs, wide receivers, and tight ends using advanced efficiency metrics. Rankings highlight which players provide the most value to their teams."),
+            html.Ul([
+                html.Li([
+                    html.B("EPA per Play: "),
+                    "Average expected points added per play."
+                ]),
+                html.Li([
+                    html.B("Total EPA: "),
+                    "The total contribution of a player in terms of expected points.",
+                    html.Ul([
+                        html.Li("Summed across all plays the player is involved in.")
+                    ])
+                ]),
+                html.Li([
+                    html.B("WAR (Wins Above Replacement): "),
+                    "The number of wins a player adds compared to a replacement-level player at their position."
+                ]),
+                html.Li([
+                    html.B("PAAS (Points Above Average Starter): "),
+                    "Measures how much better (or worse) a player performs compared to an average starter at the same position in terms of Total EPA."
+                ])
+            ])
+        ])
+    ], className="mb-3"),
+
+], fluid=True, style={"backgroundColor": "#111"})
+
+
+
+
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
@@ -602,6 +892,9 @@ app.layout = html.Div([
 # ---------------------------
 def apply_filters(frame, week, teams, ev_only):
     d = frame.copy()
+    if week is None:
+        max_week = d["Week"].max()
+        d = d[d["Week"] == max_week]
     if week is not None:
         d = d[d["Week"] == week]
     if teams:
@@ -639,11 +932,11 @@ def make_game_card(row):
                             html.Div([
                                 dbc.Badge(f"EV: {ev:.1f}% ({ev_team})", color="success" if ev > 0 else "danger",
                                          className="me-1"),
-                                dbc.Badge(f"Proj: {row['Home Team Projected Spread']:+.1f}", color="info",
+                                dbc.Badge(f"Model Home Team Spread Proj: {row['Home Team Projected Spread']:+.1f}", color="info",
                                           className="me-1"),
-                                dbc.Badge(f"Vegas: {row['Home Team Vegas Spread']:+.1f}", color="black",
+                                dbc.Badge(f"Vegas Home Team Spread: {row['Home Team Vegas Spread']:+.1f}", color="black",
                                           className="me-1"),
-                                dbc.Badge(f"Edge: {row['Spread Edge']:+.1f}", color="secondary",
+                                dbc.Badge(f"Home Team Spread Edge: {row['Spread Edge']:+.1f}", color="secondary",
                                           className="me-1"),
                             ], style={"display": "flex"})
                         ],
@@ -668,12 +961,18 @@ def make_game_card(row):
         ])
     ], className=f"border-{border_color} mb-2")
 
-def make_power_rankings_cards(power_df,filter_teams=None, sort_by="Rank"):
+def make_power_rankings_cards(power_df,week = None,filter_teams=None, sort_by="Rank"):
     pills = []
+    if week is None:
+        max_week = power_df["Week"].max()
+        power_df = power_df[power_df["Week"] == max_week]
+    if week is not None:
+        power_df = power_df[power_df["Week"] == week]
 
     # Apply team filter
     if filter_teams:
         power_df = power_df[power_df["Team"].isin(filter_teams)]
+
 
     # Header row
     header_row = dbc.Row(
@@ -808,7 +1107,7 @@ def create_player_card(player):
                     html.Div([
                         html.P(f"Total EPA: {player['Total EPA']}", className="mb-1"),
                         html.P(f"EPA per Play: {player['EPA per Play ( all plays contributed )']}", className="mb-1"),
-                        html.P(f"WAA: TBD", className="mb-1")  # You can calculate Wins Above Average QB if you have formula
+                        html.P(f"WAR: TBD", className="mb-1")  # You can calculate Wins Above Average QB if you have formula
                     ]),
                     width=6,
                     style={"textAlign": "right"}
@@ -847,34 +1146,55 @@ def update_game_cards(week, teams, ev_only_toggle, sort_by):
 @app.callback(
     Output("power-rankings-cards", "children"),
     Input("url", "pathname"),
+    Input("power-week-dd","value"),
     Input("power-team-dd", "value"),
 )
-def update_power_cards(pathname, selected_teams):
+def update_power_cards(pathname, selected_week, selected_teams):
     if pathname != "/power-rankings":
         raise dash.exceptions.PreventUpdate
 
     # Recalculate power_df
     team_stats = {}
-    for _, r in df.iterrows():
-        for team, mean in [(r["Home Team"], r["Home Team Str Mean"]), (r["Away Team"], r["Away Team Str Mean"])]:
-            if team not in team_stats:
-                team_stats[team] = {"total": 0, "count": 0}
-            team_stats[team]["total"] += mean
-            team_stats[team]["count"] += 1
 
-    power_df = pd.DataFrame([
-        {"Team": t, "Score": s["total"]/s["count"]} for t, s in team_stats.items()
-    ]).sort_values("Score", ascending=False)  # original sorting
-    power_df["Rank"] = range(1, len(power_df)+1)
+    for _, r in df.iterrows():
+        for week, team, mean in [
+            (r["Week"], r["Home Team"], r["Home Team Str Mean"]),
+            (r["Week"], r["Away Team"], r["Away Team Str Mean"])
+        ]:
+            if team not in team_stats:
+                team_stats[team] = {}
+            if week not in team_stats[team]:
+                team_stats[team][week] = {"total": 0, "count": 0}
+
+            team_stats[team][week]["total"] += mean
+            team_stats[team][week]["count"] += 1
+
+    # Now build a DataFrame with week info
+    records = []
+    for team, weeks in team_stats.items():
+        for week, stats in weeks.items():
+            avg_score = stats["total"] / stats["count"]
+            records.append({"Week": week, "Team": team, "Score": avg_score})
+
+    power_df = pd.DataFrame(records)
+
+    # Calculate rank and wins per week
+    power_df = power_df.sort_values(["Week", "Score"], ascending=[True, False])
+    power_df["Rank"] = power_df.groupby("Week")["Score"].rank(method="min", ascending=False).astype(int)
     power_df["Wins"] = power_df["Score"] * 33.146 + 8.3641
 
+    # Optional: sort by week and then rank
+    power_df = power_df.sort_values(["Week", "Rank"])
+
+    if selected_week:
+        power_df = power_df[power_df["Week"] == selected_week]
     # Apply team filter
     if selected_teams:
         power_df = power_df[power_df["Team"].isin(selected_teams)]
 
     # Return scrollable pills
     return html.Div(
-        make_power_rankings_cards(power_df),
+        make_power_rankings_cards(power_df,selected_week),
         style={
             "maxHeight": "500px",
             "overflowY": "auto",
@@ -899,7 +1219,6 @@ def update_power_cards(pathname, selected_teams):
     Input("position-tabs", "value")
 )
 def render_tab_content(active_tab):
-    print(active_tab)
     # Fallback if None
 
     if not active_tab:
@@ -920,6 +1239,8 @@ def display_page(pathname):
         return power_page
     elif pathname == '/player-rankings':
         return player_page
+    elif pathname == '/glossary':
+        return glossary_page
     else:
         return home_page
 
