@@ -51,7 +51,7 @@ def create_master_predictions(folder_path, file_type="csv"):
     print(f"Master file created with {len(master_df)} rows.")
     return master_df
 
-# create_master_predictions("2025_Weekly_Predictions", file_type="csv")
+create_master_predictions("2025_Weekly_Predictions", file_type="csv")
 # ---------------------------
 # Config
 # ---------------------------
