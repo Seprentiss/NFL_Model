@@ -82,7 +82,7 @@ if df["Expected Value (%)"].dtype == object:
     df["Expected Value (%)"] = pd.to_numeric(df["Expected Value (%)"], errors='coerce')
 
 df["EV_Positive"] = df["Expected Value (%)"].fillna(0) > 0
-df["Spread Edge"] = abs(df["Home Team Projected Spread"] - df["Home Team Vegas Spread"])
+df["Spread Edge"] = abs(df["Home Team Projected Spread"]) - abs(df["Home Team Vegas Spread"])
 
 df["Win% Differential"] = (df["Home Win %"] - df["Away Win %"]).abs()
 

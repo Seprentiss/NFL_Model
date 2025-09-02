@@ -321,7 +321,7 @@ for week in weeks:
 
         results.append(combined_result)
 
-    save_to_csv(f"2025 Weekly Predictions/Week {week} Predictions_Full_Season.csv", results)
+    save_to_csv(f"2025_Weekly_Predictions/Week_{week}_Predictions_Full_Season.csv", results)
 
     #     if (home_net > away_net):
     #         if home_team == main.getTeamAbv(week_data["Winner/tie"].iloc[i]):

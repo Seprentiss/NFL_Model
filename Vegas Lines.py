@@ -14,7 +14,7 @@ url = "https://www.vegasinsider.com/nfl/odds/las-vegas/"
 # Fetch the webpage content with the custom headers
 response = requests.get(url, headers=headers)
 
-df = pd.read_html("https://www.vegasinsider.com/nfl/odds/las-vegas/")
+df = pd.read_html("https://www.vegasinsider.com/nfl/odds/las-vegas/")[0]
 
 print(df)
 
@@ -46,4 +46,4 @@ df = df[~df['Spread'].str.startswith(('u', 'o'))]
 
 print(df)
 
-# df[["Team","Spread"]].to_csv(f"2025 Vegas Lines/Vegas_Lines_Week_{week}.csv",index=False)
+df[["Team","Spread"]].to_csv(f"2025 Vegas Lines/Vegas_Lines_Week_{week}.csv",index=False)
