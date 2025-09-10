@@ -23,7 +23,7 @@ def CalcWinner(data, last_season_data, week, season, home_team, away_team, home_
     atwp = 1 - htwp
 
     print("┌" + "─" * 50 + "┐")
-    print(f"│ WEEK {week}: {home_team}: {round(htwp * 100)}%  {away_team}: {round(atwp * 100)}%".ljust(50) + " │")
+    print(f"│ WEEK {week}: {home_team}: {htwp * 100}%  {away_team}: {atwp * 100}%".ljust(50) + " │")
     print("└" + "─" * 50 + "┘")
 
     return {
@@ -103,6 +103,8 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
     # Update the diffplot data with the new mean and variance
     updated_x1 = np.random.normal(home_team_dvoa, np.sqrt(home_team_variance), 10_000)
     updated_x2 = np.random.normal(away_team_dvoa, np.sqrt(away_team_variance), 10_000)
+
+
 
     avg_plays = 153
     for i in range(len(updated_x1)):
@@ -251,7 +253,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [1]
+weeks = [2]
 results = []
 
 Total_Wins = 0
@@ -265,7 +267,7 @@ for week in weeks:
     if week > 21:
         hfa = 0
     print(f"HFA: {hfa}")
-    week_data = schedule_data[schedule_data["Week"] == str(week)]
+    week_data = schedule_data[schedule_data["Week"] == week]
     # print(week_data)
     for i in range(len(week_data)):
         home_team = main.getTeamAbv(week_data["HomeTm"].iloc[i])
@@ -309,7 +311,7 @@ for week in weeks:
         if away_team in QB_adj:
             away_net+= QB_adj[away_team]
 
-        if home_team not in []:
+        if home_team not in ["LAC"]:
             win_result = CalcWinner(data, last_season_data, week, season, home_team, away_team, home_net, away_net, hfa)
             spread_result = CalcSpread(data, last_season_data, week, season, home_team, away_team, home_net, away_net, hfa)
         else:

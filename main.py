@@ -635,9 +635,11 @@ def Rb_epa(rb, data, pass_stats, run_stats):
 
 
 def Player_Stats(num_of_off_plays, pass_stats, run_stats, week=2, season=2023):
-    url = f'https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_{season}.csv'
+    # url = f'https://github.com/nflverse/nflverse-data/releases/download/player_stats/player_stats_{season}.csv'
+    #
+    # data = pd.read_csv(url, low_memory=True)
 
-    data = pd.read_csv(url, low_memory=True)
+    data = pd.read_csv("player_stats_2025.csv")
 
     pos_data = pd.DataFrame(
         columns=["Player", "POS", "TM", "GP", "Total EPA", "EPA per Game", "EPA per Play ( all plays contributed )",
@@ -708,7 +710,8 @@ def Player_Stats(num_of_off_plays, pass_stats, run_stats, week=2, season=2023):
 
         # get num of team
         num_off_plays = 0
-        teams_played_for = new_data["recent_team"].unique()
+        # teams_played_for = new_data["recent_team"].unique()
+        teams_played_for = new_data["team"].unique()
         for team in teams_played_for:
             num_off_plays += num_of_off_plays[team]
 
@@ -775,7 +778,7 @@ if __name__ == '__main__':
 
         data = pd.read_csv(url, low_memory=True)
 
-        for week in range(1,2):
+        for week in range(2,3):
 
             print("Adjusting Team Stats...")
 

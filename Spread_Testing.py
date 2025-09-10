@@ -25,7 +25,7 @@ def CalcSpread(week, season, home_team, away_team, home_net, away_net,htvar,atva
     updated_x1 = np.random.normal(home_team_dvoa, np.sqrt(home_team_variance), 10_000)
     updated_x2 = np.random.normal(away_team_dvoa, np.sqrt(away_team_variance), 10_000)
 
-    avg_plays = 153/2
+    avg_plays = 77
     for i in range(len(updated_x1)):
         if updated_x1[i] < 0:
             updated_x1[i] = round(avg_plays * (updated_x1[i]))
@@ -78,7 +78,7 @@ def CalcSpread(week, season, home_team, away_team, home_net, away_net,htvar,atva
 
     vegas_mean = float(vegas_data[vegas_data["Team"] == home_team]["Spread"].iloc[0]) * -1
 
-    combined_samples = np.rint((rounded_samples * .35 + vegas_mean * .65))
+    combined_samples = np.rint((rounded_samples * 1 + vegas_mean * 0))
 
     mean = np.mean(combined_samples)
 
@@ -134,4 +134,4 @@ for week in weeks:
 
         results.append(spread_result)
 
-    save_to_csv(f"2024 Weekly Predictions/Week {week} Predictions_Full_Season_Spread_Testing_Unadjusted.csv", results)
+    save_to_csv(f"2024 Weekly Predictions/Week {week} Predictions_Full_Season_Spread_Testing_Unadjusted_Model.csv", results)

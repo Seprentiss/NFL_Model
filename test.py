@@ -12,7 +12,7 @@ loses = 0
 pushes = 0
 equal_spread_no_bet = 0
 for i in range(1,23):
-    data = pd.read_csv(f"2024 Weekly Predictions/Week {i} Predictions_Full_Season.csv")
+    data = pd.read_csv(f"2024 Weekly Predictions/Week {i} Predictions_Full_Season_Spread_Testing_Unadjusted_Model.csv")
 
     week_data = schedule_data[schedule_data["Week"] == i]
 

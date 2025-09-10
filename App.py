@@ -10,10 +10,10 @@ from dash import html, dcc
 import os
 import glob
 
-player_season = '2024'
-player_week = '22'
+player_season = '2025'
+player_week = '1'
 ratings_season = '2025'
-ratings_week = '1'
+ratings_week = '2'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def create_master_predictions(folder_path, file_type="csv"):
