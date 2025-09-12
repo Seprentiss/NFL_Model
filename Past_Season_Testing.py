@@ -305,13 +305,13 @@ for week in weeks:
             away_net = pd.read_csv(f"Team Stats/{season}/{week - 1}/Net_Ratings.csv")[away_team].iloc[0]
 
         # QB_adj = {"PHI":0.03237606837}
-        QB_adj = {}
+        QB_adj = {"SF":-0.070282051}
         if home_team in QB_adj:
             home_net+= QB_adj[home_team]
         if away_team in QB_adj:
             away_net+= QB_adj[away_team]
 
-        if home_team not in ["LAC"]:
+        if home_team not in []:
             win_result = CalcWinner(data, last_season_data, week, season, home_team, away_team, home_net, away_net, hfa)
             spread_result = CalcSpread(data, last_season_data, week, season, home_team, away_team, home_net, away_net, hfa)
         else:
