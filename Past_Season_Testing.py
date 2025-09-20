@@ -253,7 +253,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [2]
+weeks = [3]
 results = []
 
 Total_Wins = 0
@@ -305,7 +305,7 @@ for week in weeks:
             away_net = pd.read_csv(f"Team Stats/{season}/{week - 1}/Net_Ratings.csv")[away_team].iloc[0]
 
         # QB_adj = {"PHI":0.03237606837}
-        QB_adj = {"SF":-0.070282051}
+        QB_adj = {"NYJ":-0.0205025641,"CIN":-0.0107717949,"MIN":-0.0012641026}
         if home_team in QB_adj:
             home_net+= QB_adj[home_team]
         if away_team in QB_adj:

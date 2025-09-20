@@ -778,7 +778,7 @@ if __name__ == '__main__':
 
         data = pd.read_csv(url, low_memory=True)
 
-        for week in range(2,3):
+        for week in range(3,4):
 
             print("Adjusting Team Stats...")
 
