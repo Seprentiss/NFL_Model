@@ -253,7 +253,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [4]
+weeks = [5]
 results = []
 
 Total_Wins = 0
@@ -299,19 +299,18 @@ for week in weeks:
                         ((last_season[away_team].iloc[0] * 2 / 3) * .35) + (
                             ((vegas[vegas["Team"] == away_team]["Vegas Wins"].iloc[0] - 8.3641) / 33.146) * .65)) * (
                                    1 - ((week - 1) / 13))
-
         else:
             home_net = pd.read_csv(f"Team Stats/{season}/{week - 1}/Net_Ratings.csv")[home_team].iloc[0]
             away_net = pd.read_csv(f"Team Stats/{season}/{week - 1}/Net_Ratings.csv")[away_team].iloc[0]
 
-        # QB_adj = {}
-        QB_adj = {"NYJ":0.0079162393,"CIN":-0.0105333333,"MIN":0.0017435897,"SF":0.0485299145,"WAS":-0.0255965812,"NYG":0.0242769231}
+        # QB_adj = {"SF":-0.0234367521}
+        QB_adj = {"CLE":0.0477333333,"CIN":-0.0094923077,"MIN":0.0019034188,"SF":-0.0234367521,"WAS":0.0226324786,"NYG":0.0143264957, "BAL":-0.1579538462}
         if home_team in QB_adj:
             home_net+= QB_adj[home_team]
         if away_team in QB_adj:
             away_net+= QB_adj[away_team]
 
-        if home_team not in []:
+        if home_team not in ["MIN"]:
             win_result = CalcWinner(data, last_season_data, week, season, home_team, away_team, home_net, away_net, hfa)
             spread_result = CalcSpread(data, last_season_data, week, season, home_team, away_team, home_net, away_net, hfa)
         else:

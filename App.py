@@ -11,7 +11,7 @@ import os
 import glob
 
 player_season = '2025'
-player_week = '3'
+player_week = '4'
 ratings_season = '2025'
 ratings_week = '4'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
