@@ -11,9 +11,9 @@ import os
 import glob
 
 player_season = '2025'
-player_week = '4'
+player_week = '8'
 ratings_season = '2025'
-ratings_week = '4'
+ratings_week = '8'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def create_master_predictions(folder_path, file_type="csv"):
