@@ -9,7 +9,7 @@ for season in range(1999,2020):
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-for season in range(2020,2025):
+for season in range(2020,2026):
     directory_path = f"Team Stats/{season}/{22}/Net_Ratings.csv"
     data = pd.read_csv(directory_path)
     for team in data.columns.values:
@@ -39,7 +39,7 @@ for season in range(1999,2020):
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-for season in range(2020,2025):
+for season in range(2020,2026):
     directory_path = f"Team Stats/{season}/{22}/Net_Off_Ratings.csv"
     data = pd.read_csv(directory_path)
     for team in data.columns.values:
@@ -69,7 +69,7 @@ for season in range(1999,2020):
     for team in data.columns.values:
         teams_dict[f"{team} ( {season} )"] = round(data[team].iloc[0],3)
 
-for season in range(2020,2025):
+for season in range(2020,2026):
     directory_path = f"Team Stats/{season}/{22}/Net_Def_Ratings.csv"
     data = pd.read_csv(directory_path)
     for team in data.columns.values:

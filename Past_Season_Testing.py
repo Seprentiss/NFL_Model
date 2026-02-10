@@ -42,6 +42,7 @@ def CalcWinner(data, last_season_data, week, season, home_team, away_team, home_
 
 def calculate_ev(mean, vegas_mean, cpev,home_team,away_team):
     def ev_for_side(spread_line, vegas_thresh, flip):
+        spread_line = max(min(spread_line, 19), -19)
         if flip:
             value = cpev[(cpev["true_line"] == spread_line) & (cpev["market_line"] == vegas_thresh)]['ev_roi'].values[0]
             return value
@@ -253,7 +254,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [9]
+weeks = [22]
 results = []
 
 Total_Wins = 0
@@ -304,8 +305,8 @@ for week in weeks:
             away_net = pd.read_csv(f"Team Stats/{season}/{week - 1}/Net_Ratings.csv")[away_team].iloc[0]
 
         # QB_adj = {}
-        QB_adj = {"BAL":0.1529179487
-            ,"WAS":0.0138598291, "ATL": 0.0050521368, "CAR":0.0117085470, "ARI":-0.0313367521,"NO":0.0385102564
+        QB_adj = {
+            # "DEN":-0.0315589744,
                   }
         if home_team in QB_adj:
             home_net+= QB_adj[home_team]

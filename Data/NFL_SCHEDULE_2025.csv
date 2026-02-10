@@ -91,7 +91,7 @@ Week,Day,Date,Time,Winner/tie,Unnamed: 5,Loser/tie,Unnamed: 7,PtsW,PtsL,YdsW,TOW
 6,Sun,2025-10-12,4:25PM,Tampa Bay Buccaneers,,San Francisco 49ers,boxscore,30,19,352,0,363,2,Tampa Bay Buccaneers,San Francisco 49ers
 6,Sun,2025-10-12,8:20PM,Kansas City Chiefs,,Detroit Lions,boxscore,30,17,355,0,297,0,Kansas City Chiefs,Detroit Lions
 6,Mon,2025-10-13,7:15PM,Atlanta Falcons,,Buffalo Bills,boxscore,24,14,443,0,291,2,Atlanta Falcons,Buffalo Bills
-6,Mon,2025-10-13,8:15PM,Chicago Bears,@,Washington Commanders,boxscore,25,24,381,0,329,3,Washington Commanders,Chicago Bears
+6,Mon,2025-10-13,8:15PM,Chicago Bears,@,Washington Commanders,boxscore,25,24,386,0,329,3,Washington Commanders,Chicago Bears
 7,Thu,2025-10-16,8:15PM,Cincinnati Bengals,,Pittsburgh Steelers,boxscore,33,31,470,0,396,2,Cincinnati Bengals,Pittsburgh Steelers
 7,Sun,2025-10-19,9:30AM,Los Angeles Rams,@,Jacksonville Jaguars,boxscore,35,7,271,0,358,0,Jacksonville Jaguars,Los Angeles Rams
 7,Sun,2025-10-19,1:00PM,Chicago Bears,,New Orleans Saints,boxscore,26,14,386,1,253,4,Chicago Bears,New Orleans Saints
@@ -120,154 +120,167 @@ Week,Day,Date,Time,Winner/tie,Unnamed: 5,Loser/tie,Unnamed: 7,PtsW,PtsL,YdsW,TOW
 8,Sun,2025-10-26,4:25PM,Denver Broncos,,Dallas Cowboys,boxscore,44,24,426,1,339,2,Denver Broncos,Dallas Cowboys
 8,Sun,2025-10-26,8:20PM,Green Bay Packers,@,Pittsburgh Steelers,boxscore,35,25,454,0,295,1,Pittsburgh Steelers,Green Bay Packers
 8,Mon,2025-10-27,8:15PM,Kansas City Chiefs,,Washington Commanders,boxscore,28,7,432,2,260,2,Kansas City Chiefs,Washington Commanders
-9,Thu,2025-10-30,8:15PM,Baltimore Ravens,@,Miami Dolphins,preview,,,,,,,Miami Dolphins,Baltimore Ravens
-9,Sun,2025-11-02,1:00PM,Atlanta Falcons,@,New England Patriots,preview,,,,,,,New England Patriots,Atlanta Falcons
-9,Sun,2025-11-02,1:00PM,Carolina Panthers,@,Green Bay Packers,preview,,,,,,,Green Bay Packers,Carolina Panthers
-9,Sun,2025-11-02,1:00PM,Chicago Bears,@,Cincinnati Bengals,preview,,,,,,,Cincinnati Bengals,Chicago Bears
-9,Sun,2025-11-02,1:00PM,Indianapolis Colts,@,Pittsburgh Steelers,preview,,,,,,,Pittsburgh Steelers,Indianapolis Colts
-9,Sun,2025-11-02,1:00PM,Denver Broncos,@,Houston Texans,preview,,,,,,,Houston Texans,Denver Broncos
-9,Sun,2025-11-02,1:00PM,Minnesota Vikings,@,Detroit Lions,preview,,,,,,,Detroit Lions,Minnesota Vikings
-9,Sun,2025-11-02,1:00PM,Los Angeles Chargers,@,Tennessee Titans,preview,,,,,,,Tennessee Titans,Los Angeles Chargers
-9,Sun,2025-11-02,1:00PM,San Francisco 49ers,@,New York Giants,preview,,,,,,,New York Giants,San Francisco 49ers
-9,Sun,2025-11-02,4:05PM,Jacksonville Jaguars,@,Las Vegas Raiders,preview,,,,,,,Las Vegas Raiders,Jacksonville Jaguars
-9,Sun,2025-11-02,4:05PM,New Orleans Saints,@,Los Angeles Rams,preview,,,,,,,Los Angeles Rams,New Orleans Saints
-9,Sun,2025-11-02,4:25PM,Kansas City Chiefs,@,Buffalo Bills,preview,,,,,,,Buffalo Bills,Kansas City Chiefs
-9,Sun,2025-11-02,8:20PM,Seattle Seahawks,@,Washington Commanders,preview,,,,,,,Washington Commanders,Seattle Seahawks
-9,Mon,2025-11-03,8:15PM,Arizona Cardinals,@,Dallas Cowboys,preview,,,,,,,Dallas Cowboys,Arizona Cardinals
-10,Thu,2025-11-06,8:15PM,Las Vegas Raiders,@,Denver Broncos,preview,,,,,,,Denver Broncos,Las Vegas Raiders
-10,Sun,2025-11-09,9:30AM,Atlanta Falcons,@,Indianapolis Colts,preview,,,,,,,Indianapolis Colts,Atlanta Falcons
-10,Sun,2025-11-09,1:00PM,Buffalo Bills,@,Miami Dolphins,preview,,,,,,,Miami Dolphins,Buffalo Bills
-10,Sun,2025-11-09,1:00PM,Cleveland Browns,@,New York Jets,preview,,,,,,,New York Jets,Cleveland Browns
-10,Sun,2025-11-09,1:00PM,Jacksonville Jaguars,@,Houston Texans,preview,,,,,,,Houston Texans,Jacksonville Jaguars
-10,Sun,2025-11-09,1:00PM,New Orleans Saints,@,Carolina Panthers,preview,,,,,,,Carolina Panthers,New Orleans Saints
-10,Sun,2025-11-09,1:00PM,New England Patriots,@,Tampa Bay Buccaneers,preview,,,,,,,Tampa Bay Buccaneers,New England Patriots
-10,Sun,2025-11-09,1:00PM,New York Giants,@,Chicago Bears,preview,,,,,,,Chicago Bears,New York Giants
-10,Sun,2025-11-09,1:00PM,Baltimore Ravens,@,Minnesota Vikings,preview,,,,,,,Minnesota Vikings,Baltimore Ravens
-10,Sun,2025-11-09,4:05PM,Arizona Cardinals,@,Seattle Seahawks,preview,,,,,,,Seattle Seahawks,Arizona Cardinals
-10,Sun,2025-11-09,4:25PM,Detroit Lions,@,Washington Commanders,preview,,,,,,,Washington Commanders,Detroit Lions
-10,Sun,2025-11-09,4:25PM,Los Angeles Rams,@,San Francisco 49ers,preview,,,,,,,San Francisco 49ers,Los Angeles Rams
-10,Sun,2025-11-09,8:20PM,Pittsburgh Steelers,@,Los Angeles Chargers,preview,,,,,,,Los Angeles Chargers,Pittsburgh Steelers
-10,Mon,2025-11-10,8:15PM,Philadelphia Eagles,@,Green Bay Packers,preview,,,,,,,Green Bay Packers,Philadelphia Eagles
-11,Thu,2025-11-13,8:15PM,New York Jets,@,New England Patriots,preview,,,,,,,New England Patriots,New York Jets
-11,Sun,2025-11-16,9:30AM,Washington Commanders,@,Miami Dolphins,preview,,,,,,,Miami Dolphins,Washington Commanders
-11,Sun,2025-11-16,1:00PM,Carolina Panthers,@,Atlanta Falcons,preview,,,,,,,Atlanta Falcons,Carolina Panthers
-11,Sun,2025-11-16,1:00PM,Chicago Bears,@,Minnesota Vikings,preview,,,,,,,Minnesota Vikings,Chicago Bears
-11,Sun,2025-11-16,1:00PM,Cincinnati Bengals,@,Pittsburgh Steelers,preview,,,,,,,Pittsburgh Steelers,Cincinnati Bengals
-11,Sun,2025-11-16,1:00PM,Green Bay Packers,@,New York Giants,preview,,,,,,,New York Giants,Green Bay Packers
-11,Sun,2025-11-16,1:00PM,Houston Texans,@,Tennessee Titans,preview,,,,,,,Tennessee Titans,Houston Texans
-11,Sun,2025-11-16,1:00PM,Los Angeles Chargers,@,Jacksonville Jaguars,preview,,,,,,,Jacksonville Jaguars,Los Angeles Chargers
-11,Sun,2025-11-16,1:00PM,Tampa Bay Buccaneers,@,Buffalo Bills,preview,,,,,,,Buffalo Bills,Tampa Bay Buccaneers
-11,Sun,2025-11-16,4:05PM,Seattle Seahawks,@,Los Angeles Rams,preview,,,,,,,Los Angeles Rams,Seattle Seahawks
-11,Sun,2025-11-16,4:05PM,San Francisco 49ers,@,Arizona Cardinals,preview,,,,,,,Arizona Cardinals,San Francisco 49ers
-11,Sun,2025-11-16,4:25PM,Kansas City Chiefs,@,Denver Broncos,preview,,,,,,,Denver Broncos,Kansas City Chiefs
-11,Sun,2025-11-16,4:25PM,Baltimore Ravens,@,Cleveland Browns,preview,,,,,,,Cleveland Browns,Baltimore Ravens
-11,Sun,2025-11-16,8:20PM,Detroit Lions,@,Philadelphia Eagles,preview,,,,,,,Philadelphia Eagles,Detroit Lions
-11,Mon,2025-11-17,8:15PM,Dallas Cowboys,@,Las Vegas Raiders,preview,,,,,,,Las Vegas Raiders,Dallas Cowboys
-12,Thu,2025-11-20,8:15PM,Buffalo Bills,@,Houston Texans,preview,,,,,,,Houston Texans,Buffalo Bills
-12,Sun,2025-11-23,1:00PM,Indianapolis Colts,@,Kansas City Chiefs,preview,,,,,,,Kansas City Chiefs,Indianapolis Colts
-12,Sun,2025-11-23,1:00PM,Minnesota Vikings,@,Green Bay Packers,preview,,,,,,,Green Bay Packers,Minnesota Vikings
-12,Sun,2025-11-23,1:00PM,New England Patriots,@,Cincinnati Bengals,preview,,,,,,,Cincinnati Bengals,New England Patriots
-12,Sun,2025-11-23,1:00PM,New York Giants,@,Detroit Lions,preview,,,,,,,Detroit Lions,New York Giants
-12,Sun,2025-11-23,1:00PM,New York Jets,@,Baltimore Ravens,preview,,,,,,,Baltimore Ravens,New York Jets
-12,Sun,2025-11-23,1:00PM,Pittsburgh Steelers,@,Chicago Bears,preview,,,,,,,Chicago Bears,Pittsburgh Steelers
-12,Sun,2025-11-23,1:00PM,Seattle Seahawks,@,Tennessee Titans,preview,,,,,,,Tennessee Titans,Seattle Seahawks
-12,Sun,2025-11-23,4:05PM,Cleveland Browns,@,Las Vegas Raiders,preview,,,,,,,Las Vegas Raiders,Cleveland Browns
-12,Sun,2025-11-23,4:05PM,Jacksonville Jaguars,@,Arizona Cardinals,preview,,,,,,,Arizona Cardinals,Jacksonville Jaguars
-12,Sun,2025-11-23,4:25PM,Atlanta Falcons,@,New Orleans Saints,preview,,,,,,,New Orleans Saints,Atlanta Falcons
-12,Sun,2025-11-23,4:25PM,Philadelphia Eagles,@,Dallas Cowboys,preview,,,,,,,Dallas Cowboys,Philadelphia Eagles
-12,Sun,2025-11-23,8:20PM,Tampa Bay Buccaneers,@,Los Angeles Rams,preview,,,,,,,Los Angeles Rams,Tampa Bay Buccaneers
-12,Mon,2025-11-24,8:15PM,Carolina Panthers,@,San Francisco 49ers,preview,,,,,,,San Francisco 49ers,Carolina Panthers
-13,Thu,2025-11-27,1:00PM,Green Bay Packers,@,Detroit Lions,preview,,,,,,,Detroit Lions,Green Bay Packers
-13,Thu,2025-11-27,4:30PM,Kansas City Chiefs,@,Dallas Cowboys,preview,,,,,,,Dallas Cowboys,Kansas City Chiefs
-13,Thu,2025-11-27,8:20PM,Cincinnati Bengals,@,Baltimore Ravens,preview,,,,,,,Baltimore Ravens,Cincinnati Bengals
-13,Fri,2025-11-28,3:00PM,Chicago Bears,@,Philadelphia Eagles,preview,,,,,,,Philadelphia Eagles,Chicago Bears
-13,Sun,2025-11-30,1:00PM,Atlanta Falcons,@,New York Jets,preview,,,,,,,New York Jets,Atlanta Falcons
-13,Sun,2025-11-30,1:00PM,Arizona Cardinals,@,Tampa Bay Buccaneers,preview,,,,,,,Tampa Bay Buccaneers,Arizona Cardinals
-13,Sun,2025-11-30,1:00PM,Houston Texans,@,Indianapolis Colts,preview,,,,,,,Indianapolis Colts,Houston Texans
-13,Sun,2025-11-30,1:00PM,Jacksonville Jaguars,@,Tennessee Titans,preview,,,,,,,Tennessee Titans,Jacksonville Jaguars
-13,Sun,2025-11-30,1:00PM,New Orleans Saints,@,Miami Dolphins,preview,,,,,,,Miami Dolphins,New Orleans Saints
-13,Sun,2025-11-30,1:00PM,Los Angeles Rams,@,Carolina Panthers,preview,,,,,,,Carolina Panthers,Los Angeles Rams
-13,Sun,2025-11-30,1:00PM,San Francisco 49ers,@,Cleveland Browns,preview,,,,,,,Cleveland Browns,San Francisco 49ers
-13,Sun,2025-11-30,4:05PM,Minnesota Vikings,@,Seattle Seahawks,preview,,,,,,,Seattle Seahawks,Minnesota Vikings
-13,Sun,2025-11-30,4:25PM,Buffalo Bills,@,Pittsburgh Steelers,preview,,,,,,,Pittsburgh Steelers,Buffalo Bills
-13,Sun,2025-11-30,4:25PM,Las Vegas Raiders,@,Los Angeles Chargers,preview,,,,,,,Los Angeles Chargers,Las Vegas Raiders
-13,Sun,2025-11-30,8:20PM,Denver Broncos,@,Washington Commanders,preview,,,,,,,Washington Commanders,Denver Broncos
-13,Mon,2025-12-01,8:15PM,New York Giants,@,New England Patriots,preview,,,,,,,New England Patriots,New York Giants
-14,Thu,2025-12-04,8:15PM,Dallas Cowboys,@,Detroit Lions,preview,,,,,,,Detroit Lions,Dallas Cowboys
-14,Sun,2025-12-07,1:00PM,Chicago Bears,@,Green Bay Packers,preview,,,,,,,Green Bay Packers,Chicago Bears
-14,Sun,2025-12-07,1:00PM,Indianapolis Colts,@,Jacksonville Jaguars,preview,,,,,,,Jacksonville Jaguars,Indianapolis Colts
-14,Sun,2025-12-07,1:00PM,Miami Dolphins,@,New York Jets,preview,,,,,,,New York Jets,Miami Dolphins
-14,Sun,2025-12-07,1:00PM,New Orleans Saints,@,Tampa Bay Buccaneers,preview,,,,,,,Tampa Bay Buccaneers,New Orleans Saints
-14,Sun,2025-12-07,1:00PM,Tennessee Titans,@,Cleveland Browns,preview,,,,,,,Cleveland Browns,Tennessee Titans
-14,Sun,2025-12-07,1:00PM,Pittsburgh Steelers,@,Baltimore Ravens,preview,,,,,,,Baltimore Ravens,Pittsburgh Steelers
-14,Sun,2025-12-07,1:00PM,Seattle Seahawks,@,Atlanta Falcons,preview,,,,,,,Atlanta Falcons,Seattle Seahawks
-14,Sun,2025-12-07,1:00PM,Washington Commanders,@,Minnesota Vikings,preview,,,,,,,Minnesota Vikings,Washington Commanders
-14,Sun,2025-12-07,4:05PM,Denver Broncos,@,Las Vegas Raiders,preview,,,,,,,Las Vegas Raiders,Denver Broncos
-14,Sun,2025-12-07,4:25PM,Cincinnati Bengals,@,Buffalo Bills,preview,,,,,,,Buffalo Bills,Cincinnati Bengals
-14,Sun,2025-12-07,4:25PM,Los Angeles Rams,@,Arizona Cardinals,preview,,,,,,,Arizona Cardinals,Los Angeles Rams
-14,Sun,2025-12-07,8:20PM,Houston Texans,@,Kansas City Chiefs,preview,,,,,,,Kansas City Chiefs,Houston Texans
-14,Mon,2025-12-08,8:15PM,Philadelphia Eagles,@,Los Angeles Chargers,preview,,,,,,,Los Angeles Chargers,Philadelphia Eagles
-15,Thu,2025-12-11,8:15PM,Atlanta Falcons,@,Tampa Bay Buccaneers,preview,,,,,,,Tampa Bay Buccaneers,Atlanta Falcons
-15,Sun,2025-12-14,1:00PM,Buffalo Bills,@,New England Patriots,preview,,,,,,,New England Patriots,Buffalo Bills
-15,Sun,2025-12-14,1:00PM,Cleveland Browns,@,Chicago Bears,preview,,,,,,,Chicago Bears,Cleveland Browns
-15,Sun,2025-12-14,1:00PM,Arizona Cardinals,@,Houston Texans,preview,,,,,,,Houston Texans,Arizona Cardinals
-15,Sun,2025-12-14,1:00PM,New York Jets,@,Jacksonville Jaguars,preview,,,,,,,Jacksonville Jaguars,New York Jets
-15,Sun,2025-12-14,1:00PM,Las Vegas Raiders,@,Philadelphia Eagles,preview,,,,,,,Philadelphia Eagles,Las Vegas Raiders
-15,Sun,2025-12-14,1:00PM,Baltimore Ravens,@,Cincinnati Bengals,preview,,,,,,,Cincinnati Bengals,Baltimore Ravens
-15,Sun,2025-12-14,1:00PM,Los Angeles Chargers,@,Kansas City Chiefs,preview,,,,,,,Kansas City Chiefs,Los Angeles Chargers
-15,Sun,2025-12-14,1:00PM,Washington Commanders,@,New York Giants,preview,,,,,,,New York Giants,Washington Commanders
-15,Sun,2025-12-14,4:25PM,Carolina Panthers,@,New Orleans Saints,preview,,,,,,,New Orleans Saints,Carolina Panthers
-15,Sun,2025-12-14,4:25PM,Indianapolis Colts,@,Seattle Seahawks,preview,,,,,,,Seattle Seahawks,Indianapolis Colts
-15,Sun,2025-12-14,4:25PM,Detroit Lions,@,Los Angeles Rams,preview,,,,,,,Los Angeles Rams,Detroit Lions
-15,Sun,2025-12-14,4:25PM,Green Bay Packers,@,Denver Broncos,preview,,,,,,,Denver Broncos,Green Bay Packers
-15,Sun,2025-12-14,4:25PM,Tennessee Titans,@,San Francisco 49ers,preview,,,,,,,San Francisco 49ers,Tennessee Titans
-15,Sun,2025-12-14,8:20PM,Minnesota Vikings,@,Dallas Cowboys,preview,,,,,,,Dallas Cowboys,Minnesota Vikings
-15,Mon,2025-12-15,8:15PM,Miami Dolphins,@,Pittsburgh Steelers,preview,,,,,,,Pittsburgh Steelers,Miami Dolphins
-16,Thu,2025-12-18,8:15PM,Los Angeles Rams,@,Seattle Seahawks,preview,,,,,,,Seattle Seahawks,Los Angeles Rams
-16,Sat,2025-12-20,1:00PM,Green Bay Packers,@,Chicago Bears,preview,,,,,,,Chicago Bears,Green Bay Packers
-16,Sat,2025-12-20,1:00PM,Philadelphia Eagles,@,Washington Commanders,preview,,,,,,,Washington Commanders,Philadelphia Eagles
-16,Sun,2025-12-21,1:00PM,Buffalo Bills,@,Cleveland Browns,preview,,,,,,,Cleveland Browns,Buffalo Bills
-16,Sun,2025-12-21,1:00PM,Kansas City Chiefs,@,Tennessee Titans,preview,,,,,,,Tennessee Titans,Kansas City Chiefs
-16,Sun,2025-12-21,1:00PM,Minnesota Vikings,@,New York Giants,preview,,,,,,,New York Giants,Minnesota Vikings
-16,Sun,2025-12-21,1:00PM,New England Patriots,@,Baltimore Ravens,preview,,,,,,,Baltimore Ravens,New England Patriots
-16,Sun,2025-12-21,1:00PM,New York Jets,@,New Orleans Saints,preview,,,,,,,New Orleans Saints,New York Jets
-16,Sun,2025-12-21,1:00PM,Los Angeles Chargers,@,Dallas Cowboys,preview,,,,,,,Dallas Cowboys,Los Angeles Chargers
-16,Sun,2025-12-21,1:00PM,Tampa Bay Buccaneers,@,Carolina Panthers,preview,,,,,,,Carolina Panthers,Tampa Bay Buccaneers
-16,Sun,2025-12-21,4:05PM,Atlanta Falcons,@,Arizona Cardinals,preview,,,,,,,Arizona Cardinals,Atlanta Falcons
-16,Sun,2025-12-21,4:05PM,Jacksonville Jaguars,@,Denver Broncos,preview,,,,,,,Denver Broncos,Jacksonville Jaguars
-16,Sun,2025-12-21,4:25PM,Pittsburgh Steelers,@,Detroit Lions,preview,,,,,,,Detroit Lions,Pittsburgh Steelers
-16,Sun,2025-12-21,4:25PM,Las Vegas Raiders,@,Houston Texans,preview,,,,,,,Houston Texans,Las Vegas Raiders
-16,Sun,2025-12-21,8:20PM,Cincinnati Bengals,@,Miami Dolphins,preview,,,,,,,Miami Dolphins,Cincinnati Bengals
-16,Mon,2025-12-22,8:15PM,San Francisco 49ers,@,Indianapolis Colts,preview,,,,,,,Indianapolis Colts,San Francisco 49ers
-17,Thu,2025-12-25,1:00PM,Dallas Cowboys,@,Washington Commanders,preview,,,,,,,Washington Commanders,Dallas Cowboys
-17,Thu,2025-12-25,4:30PM,Detroit Lions,@,Minnesota Vikings,preview,,,,,,,Minnesota Vikings,Detroit Lions
-17,Thu,2025-12-25,8:15PM,Denver Broncos,@,Kansas City Chiefs,preview,,,,,,,Kansas City Chiefs,Denver Broncos
-17,Sun,2025-12-28,1:00PM,Arizona Cardinals,@,Cincinnati Bengals,preview,,,,,,,Cincinnati Bengals,Arizona Cardinals
-17,Sun,2025-12-28,1:00PM,Houston Texans,@,Los Angeles Chargers,preview,,,,,,,Los Angeles Chargers,Houston Texans
-17,Sun,2025-12-28,1:00PM,Jacksonville Jaguars,@,Indianapolis Colts,preview,,,,,,,Indianapolis Colts,Jacksonville Jaguars
-17,Sun,2025-12-28,1:00PM,New Orleans Saints,@,Tennessee Titans,preview,,,,,,,Tennessee Titans,New Orleans Saints
-17,Sun,2025-12-28,1:00PM,New England Patriots,@,New York Jets,preview,,,,,,,New York Jets,New England Patriots
-17,Sun,2025-12-28,1:00PM,New York Giants,@,Las Vegas Raiders,preview,,,,,,,Las Vegas Raiders,New York Giants
-17,Sun,2025-12-28,1:00PM,Pittsburgh Steelers,@,Cleveland Browns,preview,,,,,,,Cleveland Browns,Pittsburgh Steelers
-17,Sun,2025-12-28,1:00PM,Baltimore Ravens,@,Green Bay Packers,preview,,,,,,,Green Bay Packers,Baltimore Ravens
-17,Sun,2025-12-28,1:00PM,Seattle Seahawks,@,Carolina Panthers,preview,,,,,,,Carolina Panthers,Seattle Seahawks
-17,Sun,2025-12-28,1:00PM,Tampa Bay Buccaneers,@,Miami Dolphins,preview,,,,,,,Miami Dolphins,Tampa Bay Buccaneers
-17,Sun,2025-12-28,4:25PM,Philadelphia Eagles,@,Buffalo Bills,preview,,,,,,,Buffalo Bills,Philadelphia Eagles
-17,Sun,2025-12-28,8:20PM,Chicago Bears,@,San Francisco 49ers,preview,,,,,,,San Francisco 49ers,Chicago Bears
-17,Mon,2025-12-29,8:15PM,Los Angeles Rams,@,Atlanta Falcons,preview,,,,,,,Atlanta Falcons,Los Angeles Rams
-18,Sun,2026-01-04,1:00PM,Carolina Panthers,@,Tampa Bay Buccaneers,preview,,,,,,,Tampa Bay Buccaneers,Carolina Panthers
-18,Sun,2026-01-04,1:00PM,Cleveland Browns,@,Cincinnati Bengals,preview,,,,,,,Cincinnati Bengals,Cleveland Browns
-18,Sun,2026-01-04,1:00PM,Indianapolis Colts,@,Houston Texans,preview,,,,,,,Houston Texans,Indianapolis Colts
-18,Sun,2026-01-04,1:00PM,Arizona Cardinals,@,Los Angeles Rams,preview,,,,,,,Los Angeles Rams,Arizona Cardinals
-18,Sun,2026-01-04,1:00PM,Dallas Cowboys,@,New York Giants,preview,,,,,,,New York Giants,Dallas Cowboys
-18,Sun,2026-01-04,1:00PM,Detroit Lions,@,Chicago Bears,preview,,,,,,,Chicago Bears,Detroit Lions
-18,Sun,2026-01-04,1:00PM,Green Bay Packers,@,Minnesota Vikings,preview,,,,,,,Minnesota Vikings,Green Bay Packers
-18,Sun,2026-01-04,1:00PM,Kansas City Chiefs,@,Las Vegas Raiders,preview,,,,,,,Las Vegas Raiders,Kansas City Chiefs
-18,Sun,2026-01-04,1:00PM,Miami Dolphins,@,New England Patriots,preview,,,,,,,New England Patriots,Miami Dolphins
-18,Sun,2026-01-04,1:00PM,New Orleans Saints,@,Atlanta Falcons,preview,,,,,,,Atlanta Falcons,New Orleans Saints
-18,Sun,2026-01-04,1:00PM,New York Jets,@,Buffalo Bills,preview,,,,,,,Buffalo Bills,New York Jets
-18,Sun,2026-01-04,1:00PM,Tennessee Titans,@,Jacksonville Jaguars,preview,,,,,,,Jacksonville Jaguars,Tennessee Titans
-18,Sun,2026-01-04,1:00PM,Baltimore Ravens,@,Pittsburgh Steelers,preview,,,,,,,Pittsburgh Steelers,Baltimore Ravens
-18,Sun,2026-01-04,1:00PM,Los Angeles Chargers,@,Denver Broncos,preview,,,,,,,Denver Broncos,Los Angeles Chargers
-18,Sun,2026-01-04,1:00PM,Seattle Seahawks,@,San Francisco 49ers,preview,,,,,,,San Francisco 49ers,Seattle Seahawks
-18,Sun,2026-01-04,1:00PM,Washington Commanders,@,Philadelphia Eagles,preview,,,,,,,Philadelphia Eagles,Washington Commanders
+9,Thu,2025-10-30,8:15PM,Baltimore Ravens,@,Miami Dolphins,boxscore,28,6,338,0,332,3,Miami Dolphins,Baltimore Ravens
+9,Sun,2025-11-02,1:00PM,New England Patriots,,Atlanta Falcons,boxscore,24,23,331,2,288,0,New England Patriots,Atlanta Falcons
+9,Sun,2025-11-02,1:00PM,Chicago Bears,@,Cincinnati Bengals,boxscore,47,42,576,0,495,3,Cincinnati Bengals,Chicago Bears
+9,Sun,2025-11-02,1:00PM,Minnesota Vikings,@,Detroit Lions,boxscore,27,24,258,1,305,1,Detroit Lions,Minnesota Vikings
+9,Sun,2025-11-02,1:00PM,Carolina Panthers,@,Green Bay Packers,boxscore,16,13,265,1,369,2,Green Bay Packers,Carolina Panthers
+9,Sun,2025-11-02,1:00PM,Pittsburgh Steelers,,Indianapolis Colts,boxscore,27,20,225,1,368,6,Pittsburgh Steelers,Indianapolis Colts
+9,Sun,2025-11-02,1:00PM,Denver Broncos,@,Houston Texans,boxscore,18,15,271,2,268,0,Houston Texans,Denver Broncos
+9,Sun,2025-11-02,1:00PM,San Francisco 49ers,@,New York Giants,boxscore,34,24,380,1,296,0,New York Giants,San Francisco 49ers
+9,Sun,2025-11-02,1:00PM,Los Angeles Chargers,@,Tennessee Titans,boxscore,27,20,343,1,206,0,Tennessee Titans,Los Angeles Chargers
+9,Sun,2025-11-02,4:05PM,Jacksonville Jaguars,@,Las Vegas Raiders,boxscore,30,29,367,1,331,1,Las Vegas Raiders,Jacksonville Jaguars
+9,Sun,2025-11-02,4:05PM,Los Angeles Rams,,New Orleans Saints,boxscore,34,10,438,0,224,2,Los Angeles Rams,New Orleans Saints
+9,Sun,2025-11-02,4:25PM,Buffalo Bills,,Kansas City Chiefs,boxscore,28,21,404,0,305,1,Buffalo Bills,Kansas City Chiefs
+9,Sun,2025-11-02,8:20PM,Seattle Seahawks,@,Washington Commanders,boxscore,38,14,418,1,290,2,Washington Commanders,Seattle Seahawks
+9,Mon,2025-11-03,8:15PM,Arizona Cardinals,@,Dallas Cowboys,boxscore,27,17,340,0,333,3,Dallas Cowboys,Arizona Cardinals
+10,Thu,2025-11-06,8:15PM,Denver Broncos,,Las Vegas Raiders,boxscore,10,7,220,2,188,1,Denver Broncos,Las Vegas Raiders
+10,Sun,2025-11-09,9:30AM,Indianapolis Colts,,Atlanta Falcons,boxscore,31,25,519,2,290,1,Indianapolis Colts,Atlanta Falcons
+10,Sun,2025-11-09,1:00PM,Miami Dolphins,,Buffalo Bills,boxscore,30,13,370,2,376,3,Miami Dolphins,Buffalo Bills
+10,Sun,2025-11-09,1:00PM,Chicago Bears,,New York Giants,boxscore,24,20,391,0,431,1,Chicago Bears,New York Giants
+10,Sun,2025-11-09,1:00PM,New York Jets,,Cleveland Browns,boxscore,27,20,169,1,278,0,New York Jets,Cleveland Browns
+10,Sun,2025-11-09,1:00PM,Houston Texans,,Jacksonville Jaguars,boxscore,36,29,412,2,213,2,Houston Texans,Jacksonville Jaguars
+10,Sun,2025-11-09,1:00PM,Baltimore Ravens,@,Minnesota Vikings,boxscore,27,19,321,0,365,3,Minnesota Vikings,Baltimore Ravens
+10,Sun,2025-11-09,1:00PM,New Orleans Saints,@,Carolina Panthers,boxscore,17,7,388,1,175,2,Carolina Panthers,New Orleans Saints
+10,Sun,2025-11-09,1:00PM,New England Patriots,@,Tampa Bay Buccaneers,boxscore,28,23,435,1,371,0,Tampa Bay Buccaneers,New England Patriots
+10,Sun,2025-11-09,4:05PM,Seattle Seahawks,,Arizona Cardinals,boxscore,44,22,372,3,335,2,Seattle Seahawks,Arizona Cardinals
+10,Sun,2025-11-09,4:25PM,Detroit Lions,@,Washington Commanders,boxscore,44,22,546,0,288,0,Washington Commanders,Detroit Lions
+10,Sun,2025-11-09,4:25PM,Los Angeles Rams,@,San Francisco 49ers,boxscore,42,26,401,0,393,2,San Francisco 49ers,Los Angeles Rams
+10,Sun,2025-11-09,8:20PM,Los Angeles Chargers,,Pittsburgh Steelers,boxscore,25,10,314,0,221,3,Los Angeles Chargers,Pittsburgh Steelers
+10,Mon,2025-11-10,8:15PM,Philadelphia Eagles,@,Green Bay Packers,boxscore,10,7,294,1,261,2,Green Bay Packers,Philadelphia Eagles
+11,Thu,2025-11-13,8:15PM,New England Patriots,,New York Jets,boxscore,27,14,336,0,245,1,New England Patriots,New York Jets
+11,Sun,2025-11-16,9:30AM,Miami Dolphins,,Washington Commanders,boxscore,16,13,311,0,379,2,Miami Dolphins,Washington Commanders
+11,Sun,2025-11-16,1:00PM,Carolina Panthers,@,Atlanta Falcons,boxscore,30,27,486,0,348,1,Atlanta Falcons,Carolina Panthers
+11,Sun,2025-11-16,1:00PM,Buffalo Bills,,Tampa Bay Buccaneers,boxscore,44,32,414,3,367,2,Buffalo Bills,Tampa Bay Buccaneers
+11,Sun,2025-11-16,1:00PM,Chicago Bears,@,Minnesota Vikings,boxscore,19,17,320,0,265,2,Minnesota Vikings,Chicago Bears
+11,Sun,2025-11-16,1:00PM,Pittsburgh Steelers,,Cincinnati Bengals,boxscore,34,12,343,0,297,2,Pittsburgh Steelers,Cincinnati Bengals
+11,Sun,2025-11-16,1:00PM,Green Bay Packers,@,New York Giants,boxscore,27,20,296,0,336,2,New York Giants,Green Bay Packers
+11,Sun,2025-11-16,1:00PM,Houston Texans,@,Tennessee Titans,boxscore,16,13,315,0,229,1,Tennessee Titans,Houston Texans
+11,Sun,2025-11-16,1:00PM,Jacksonville Jaguars,,Los Angeles Chargers,boxscore,35,6,345,1,135,1,Jacksonville Jaguars,Los Angeles Chargers
+11,Sun,2025-11-16,4:05PM,San Francisco 49ers,@,Arizona Cardinals,boxscore,41,22,281,0,488,3,Arizona Cardinals,San Francisco 49ers
+11,Sun,2025-11-16,4:05PM,Los Angeles Rams,,Seattle Seahawks,boxscore,21,19,249,1,414,4,Los Angeles Rams,Seattle Seahawks
+11,Sun,2025-11-16,4:25PM,Baltimore Ravens,@,Cleveland Browns,boxscore,23,16,351,3,187,1,Cleveland Browns,Baltimore Ravens
+11,Sun,2025-11-16,4:25PM,Denver Broncos,,Kansas City Chiefs,boxscore,22,19,342,0,311,1,Denver Broncos,Kansas City Chiefs
+11,Sun,2025-11-16,8:20PM,Philadelphia Eagles,,Detroit Lions,boxscore,16,9,272,0,317,1,Philadelphia Eagles,Detroit Lions
+11,Mon,2025-11-17,8:15PM,Dallas Cowboys,@,Las Vegas Raiders,boxscore,33,16,381,1,236,1,Las Vegas Raiders,Dallas Cowboys
+12,Thu,2025-11-20,8:15PM,Houston Texans,,Buffalo Bills,boxscore,23,19,261,0,326,3,Houston Texans,Buffalo Bills
+12,Sun,2025-11-23,1:00PM,Chicago Bears,,Pittsburgh Steelers,boxscore,31,28,328,2,345,2,Chicago Bears,Pittsburgh Steelers
+12,Sun,2025-11-23,1:00PM,New England Patriots,@,Cincinnati Bengals,boxscore,26,20,392,1,307,1,Cincinnati Bengals,New England Patriots
+12,Sun,2025-11-23,1:00PM,Kansas City Chiefs,,Indianapolis Colts,boxscore,23,20,494,2,255,0,Kansas City Chiefs,Indianapolis Colts
+12,Sun,2025-11-23,1:00PM,Detroit Lions,,New York Giants,boxscore,34,27,494,1,517,1,Detroit Lions,New York Giants
+12,Sun,2025-11-23,1:00PM,Green Bay Packers,,Minnesota Vikings,boxscore,23,6,288,0,145,3,Green Bay Packers,Minnesota Vikings
+12,Sun,2025-11-23,1:00PM,Baltimore Ravens,,New York Jets,boxscore,23,10,241,0,282,2,Baltimore Ravens,New York Jets
+12,Sun,2025-11-23,1:00PM,Seattle Seahawks,@,Tennessee Titans,boxscore,30,24,353,0,296,0,Tennessee Titans,Seattle Seahawks
+12,Sun,2025-11-23,4:05PM,Cleveland Browns,@,Las Vegas Raiders,boxscore,24,10,270,2,268,1,Las Vegas Raiders,Cleveland Browns
+12,Sun,2025-11-23,4:05PM,Jacksonville Jaguars,@,Arizona Cardinals,boxscore,27,24,371,4,326,0,Arizona Cardinals,Jacksonville Jaguars
+12,Sun,2025-11-23,4:25PM,Atlanta Falcons,@,New Orleans Saints,boxscore,24,10,302,1,293,2,New Orleans Saints,Atlanta Falcons
+12,Sun,2025-11-23,4:25PM,Dallas Cowboys,,Philadelphia Eagles,boxscore,24,21,473,2,339,2,Dallas Cowboys,Philadelphia Eagles
+12,Sun,2025-11-23,8:20PM,Los Angeles Rams,,Tampa Bay Buccaneers,boxscore,34,7,333,0,193,2,Los Angeles Rams,Tampa Bay Buccaneers
+12,Mon,2025-11-24,8:15PM,San Francisco 49ers,,Carolina Panthers,boxscore,20,9,340,3,230,2,San Francisco 49ers,Carolina Panthers
+13,Thu,2025-11-27,1:00PM,Green Bay Packers,@,Detroit Lions,boxscore,31,24,359,0,352,0,Detroit Lions,Green Bay Packers
+13,Thu,2025-11-27,4:30PM,Dallas Cowboys,,Kansas City Chiefs,boxscore,31,28,457,1,362,0,Dallas Cowboys,Kansas City Chiefs
+13,Thu,2025-11-27,8:20PM,Cincinnati Bengals,@,Baltimore Ravens,boxscore,32,14,382,1,346,5,Baltimore Ravens,Cincinnati Bengals
+13,Fri,2025-11-28,3:00PM,Chicago Bears,@,Philadelphia Eagles,boxscore,24,15,425,1,317,2,Philadelphia Eagles,Chicago Bears
+13,Sun,2025-11-30,1:00PM,New York Jets,,Atlanta Falcons,boxscore,27,24,269,0,389,1,New York Jets,Atlanta Falcons
+13,Sun,2025-11-30,1:00PM,San Francisco 49ers,@,Cleveland Browns,boxscore,26,8,252,0,253,2,Cleveland Browns,San Francisco 49ers
+13,Sun,2025-11-30,1:00PM,Houston Texans,@,Indianapolis Colts,boxscore,20,16,364,1,281,0,Indianapolis Colts,Houston Texans
+13,Sun,2025-11-30,1:00PM,Tampa Bay Buccaneers,,Arizona Cardinals,boxscore,20,17,279,0,386,2,Tampa Bay Buccaneers,Arizona Cardinals
+13,Sun,2025-11-30,1:00PM,Jacksonville Jaguars,@,Tennessee Titans,boxscore,25,3,272,0,188,2,Tennessee Titans,Jacksonville Jaguars
+13,Sun,2025-11-30,1:00PM,Miami Dolphins,,New Orleans Saints,boxscore,21,17,298,1,294,2,Miami Dolphins,New Orleans Saints
+13,Sun,2025-11-30,1:00PM,Carolina Panthers,,Los Angeles Rams,boxscore,31,28,358,0,379,3,Carolina Panthers,Los Angeles Rams
+13,Sun,2025-11-30,4:05PM,Seattle Seahawks,,Minnesota Vikings,boxscore,26,0,219,2,162,5,Seattle Seahawks,Minnesota Vikings
+13,Sun,2025-11-30,4:25PM,Buffalo Bills,@,Pittsburgh Steelers,boxscore,26,7,372,2,166,2,Pittsburgh Steelers,Buffalo Bills
+13,Sun,2025-11-30,4:25PM,Los Angeles Chargers,,Las Vegas Raiders,boxscore,31,14,341,1,156,1,Los Angeles Chargers,Las Vegas Raiders
+13,Sun,2025-11-30,8:20PM,Denver Broncos,@,Washington Commanders,boxscore,27,26,402,1,419,1,Washington Commanders,Denver Broncos
+13,Mon,2025-12-01,8:15PM,New England Patriots,,New York Giants,boxscore,33,15,395,0,239,1,New England Patriots,New York Giants
+14,Thu,2025-12-04,8:15PM,Detroit Lions,,Dallas Cowboys,boxscore,44,30,408,0,417,3,Detroit Lions,Dallas Cowboys
+14,Sun,2025-12-07,1:00PM,Seattle Seahawks,@,Atlanta Falcons,boxscore,37,9,365,1,274,3,Atlanta Falcons,Seattle Seahawks
+14,Sun,2025-12-07,1:00PM,Buffalo Bills,,Cincinnati Bengals,boxscore,39,34,416,1,338,2,Buffalo Bills,Cincinnati Bengals
+14,Sun,2025-12-07,1:00PM,Tennessee Titans,@,Cleveland Browns,boxscore,31,29,292,1,412,2,Cleveland Browns,Tennessee Titans
+14,Sun,2025-12-07,1:00PM,Jacksonville Jaguars,,Indianapolis Colts,boxscore,36,19,350,1,285,3,Jacksonville Jaguars,Indianapolis Colts
+14,Sun,2025-12-07,1:00PM,Miami Dolphins,@,New York Jets,boxscore,34,10,358,0,207,3,New York Jets,Miami Dolphins
+14,Sun,2025-12-07,1:00PM,Minnesota Vikings,,Washington Commanders,boxscore,31,0,313,0,206,3,Minnesota Vikings,Washington Commanders
+14,Sun,2025-12-07,1:00PM,New Orleans Saints,@,Tampa Bay Buccaneers,boxscore,24,20,260,1,301,1,Tampa Bay Buccaneers,New Orleans Saints
+14,Sun,2025-12-07,1:00PM,Pittsburgh Steelers,@,Baltimore Ravens,boxscore,27,22,318,0,420,1,Baltimore Ravens,Pittsburgh Steelers
+14,Sun,2025-12-07,4:05PM,Denver Broncos,@,Las Vegas Raiders,boxscore,24,17,356,0,229,0,Las Vegas Raiders,Denver Broncos
+14,Sun,2025-12-07,4:25PM,Green Bay Packers,,Chicago Bears,boxscore,28,21,337,1,315,1,Green Bay Packers,Chicago Bears
+14,Sun,2025-12-07,4:25PM,Los Angeles Rams,@,Arizona Cardinals,boxscore,45,17,530,0,314,1,Arizona Cardinals,Los Angeles Rams
+14,Sun,2025-12-07,8:20PM,Houston Texans,@,Kansas City Chiefs,boxscore,20,10,268,0,274,3,Kansas City Chiefs,Houston Texans
+14,Mon,2025-12-08,8:15PM,Los Angeles Chargers,,Philadelphia Eagles,boxscore,22,19,275,3,365,5,Los Angeles Chargers,Philadelphia Eagles
+15,Thu,2025-12-11,8:15PM,Atlanta Falcons,@,Tampa Bay Buccaneers,boxscore,29,28,476,1,338,1,Tampa Bay Buccaneers,Atlanta Falcons
+15,Sun,2025-12-14,1:00PM,Buffalo Bills,@,New England Patriots,boxscore,35,31,349,0,385,1,New England Patriots,Buffalo Bills
+15,Sun,2025-12-14,1:00PM,Chicago Bears,,Cleveland Browns,boxscore,31,3,361,0,192,3,Chicago Bears,Cleveland Browns
+15,Sun,2025-12-14,1:00PM,Baltimore Ravens,@,Cincinnati Bengals,boxscore,24,0,317,1,298,2,Cincinnati Bengals,Baltimore Ravens
+15,Sun,2025-12-14,1:00PM,Houston Texans,,Arizona Cardinals,boxscore,40,20,399,0,307,2,Houston Texans,Arizona Cardinals
+15,Sun,2025-12-14,1:00PM,Jacksonville Jaguars,,New York Jets,boxscore,48,20,438,1,284,3,Jacksonville Jaguars,New York Jets
+15,Sun,2025-12-14,1:00PM,Los Angeles Chargers,@,Kansas City Chiefs,boxscore,16,13,295,1,239,2,Kansas City Chiefs,Los Angeles Chargers
+15,Sun,2025-12-14,1:00PM,Washington Commanders,@,New York Giants,boxscore,29,21,340,2,384,1,New York Giants,Washington Commanders
+15,Sun,2025-12-14,1:00PM,Philadelphia Eagles,,Las Vegas Raiders,boxscore,31,0,387,0,75,1,Philadelphia Eagles,Las Vegas Raiders
+15,Sun,2025-12-14,4:25PM,New Orleans Saints,,Carolina Panthers,boxscore,20,17,337,0,281,1,New Orleans Saints,Carolina Panthers
+15,Sun,2025-12-14,4:25PM,Seattle Seahawks,,Indianapolis Colts,boxscore,18,16,314,0,220,1,Seattle Seahawks,Indianapolis Colts
+15,Sun,2025-12-14,4:25PM,Denver Broncos,,Green Bay Packers,boxscore,34,26,391,1,362,2,Denver Broncos,Green Bay Packers
+15,Sun,2025-12-14,4:25PM,Los Angeles Rams,,Detroit Lions,boxscore,41,34,519,1,396,0,Los Angeles Rams,Detroit Lions
+15,Sun,2025-12-14,4:25PM,San Francisco 49ers,,Tennessee Titans,boxscore,37,24,430,1,306,0,San Francisco 49ers,Tennessee Titans
+15,Sun,2025-12-14,8:20PM,Minnesota Vikings,@,Dallas Cowboys,boxscore,34,26,327,1,423,0,Dallas Cowboys,Minnesota Vikings
+15,Mon,2025-12-15,8:15PM,Pittsburgh Steelers,,Miami Dolphins,boxscore,28,15,336,0,285,1,Pittsburgh Steelers,Miami Dolphins
+16,Thu,2025-12-18,8:15PM,Seattle Seahawks,,Los Angeles Rams,boxscore,38,37,415,3,581,0,Seattle Seahawks,Los Angeles Rams
+16,Sat,2025-12-20,5:00PM,Philadelphia Eagles,@,Washington Commanders,boxscore,29,18,385,1,220,1,Washington Commanders,Philadelphia Eagles
+16,Sat,2025-12-20,8:20PM,Chicago Bears,,Green Bay Packers,boxscore,22,16,400,0,384,1,Chicago Bears,Green Bay Packers
+16,Sun,2025-12-21,1:00PM,Buffalo Bills,@,Cleveland Browns,boxscore,23,20,259,0,294,2,Cleveland Browns,Buffalo Bills
+16,Sun,2025-12-21,1:00PM,Carolina Panthers,,Tampa Bay Buccaneers,boxscore,23,20,275,0,296,1,Carolina Panthers,Tampa Bay Buccaneers
+16,Sun,2025-12-21,1:00PM,Cincinnati Bengals,@,Miami Dolphins,boxscore,45,21,407,0,389,3,Miami Dolphins,Cincinnati Bengals
+16,Sun,2025-12-21,1:00PM,Los Angeles Chargers,@,Dallas Cowboys,boxscore,34,17,452,0,340,1,Dallas Cowboys,Los Angeles Chargers
+16,Sun,2025-12-21,1:00PM,Tennessee Titans,,Kansas City Chiefs,boxscore,26,9,376,0,133,0,Tennessee Titans,Kansas City Chiefs
+16,Sun,2025-12-21,1:00PM,Minnesota Vikings,@,New York Giants,boxscore,16,13,240,2,141,1,New York Giants,Minnesota Vikings
+16,Sun,2025-12-21,1:00PM,New Orleans Saints,,New York Jets,boxscore,29,6,412,1,195,2,New Orleans Saints,New York Jets
+16,Sun,2025-12-21,4:05PM,Atlanta Falcons,@,Arizona Cardinals,boxscore,26,19,342,2,320,1,Arizona Cardinals,Atlanta Falcons
+16,Sun,2025-12-21,4:05PM,Jacksonville Jaguars,@,Denver Broncos,boxscore,34,20,346,0,445,2,Denver Broncos,Jacksonville Jaguars
+16,Sun,2025-12-21,4:25PM,Pittsburgh Steelers,@,Detroit Lions,boxscore,29,24,481,1,361,0,Detroit Lions,Pittsburgh Steelers
+16,Sun,2025-12-21,4:25PM,Houston Texans,,Las Vegas Raiders,boxscore,23,21,270,0,315,1,Houston Texans,Las Vegas Raiders
+16,Sun,2025-12-21,8:20PM,New England Patriots,@,Baltimore Ravens,boxscore,28,24,453,2,330,2,Baltimore Ravens,New England Patriots
+16,Mon,2025-12-22,8:15PM,San Francisco 49ers,@,Indianapolis Colts,boxscore,48,27,440,1,312,2,Indianapolis Colts,San Francisco 49ers
+17,Thu,2025-12-25,1:00PM,Dallas Cowboys,@,Washington Commanders,boxscore,30,23,480,0,328,0,Washington Commanders,Dallas Cowboys
+17,Thu,2025-12-25,4:30PM,Minnesota Vikings,,Detroit Lions,boxscore,23,10,161,0,231,6,Minnesota Vikings,Detroit Lions
+17,Thu,2025-12-25,8:15PM,Denver Broncos,@,Kansas City Chiefs,boxscore,20,13,303,1,139,0,Kansas City Chiefs,Denver Broncos
+17,Sat,2025-12-27,4:30PM,Houston Texans,@,Los Angeles Chargers,boxscore,20,16,362,2,275,1,Los Angeles Chargers,Houston Texans
+17,Sat,2025-12-27,8:00PM,Baltimore Ravens,@,Green Bay Packers,boxscore,41,24,414,0,363,2,Green Bay Packers,Baltimore Ravens
+17,Sun,2025-12-28,1:00PM,Seattle Seahawks,@,Carolina Panthers,boxscore,27,10,288,2,139,2,Carolina Panthers,Seattle Seahawks
+17,Sun,2025-12-28,1:00PM,Cincinnati Bengals,,Arizona Cardinals,boxscore,37,14,429,0,233,0,Cincinnati Bengals,Arizona Cardinals
+17,Sun,2025-12-28,1:00PM,Cleveland Browns,,Pittsburgh Steelers,boxscore,13,6,262,2,291,0,Cleveland Browns,Pittsburgh Steelers
+17,Sun,2025-12-28,1:00PM,Jacksonville Jaguars,@,Indianapolis Colts,boxscore,23,17,370,2,204,2,Indianapolis Colts,Jacksonville Jaguars
+17,Sun,2025-12-28,1:00PM,Miami Dolphins,,Tampa Bay Buccaneers,boxscore,20,17,298,0,380,3,Miami Dolphins,Tampa Bay Buccaneers
+17,Sun,2025-12-28,1:00PM,New Orleans Saints,@,Tennessee Titans,boxscore,34,26,423,1,336,1,Tennessee Titans,New Orleans Saints
+17,Sun,2025-12-28,1:00PM,New England Patriots,@,New York Jets,boxscore,42,10,440,0,307,1,New York Jets,New England Patriots
+17,Sun,2025-12-28,4:05PM,New York Giants,@,Las Vegas Raiders,boxscore,34,10,343,0,231,2,Las Vegas Raiders,New York Giants
+17,Sun,2025-12-28,4:25PM,Philadelphia Eagles,@,Buffalo Bills,boxscore,13,12,190,0,331,1,Buffalo Bills,Philadelphia Eagles
+17,Sun,2025-12-28,8:20PM,San Francisco 49ers,,Chicago Bears,boxscore,42,38,496,1,440,0,San Francisco 49ers,Chicago Bears
+17,Mon,2025-12-29,8:15PM,Atlanta Falcons,,Los Angeles Rams,boxscore,27,24,345,0,363,3,Atlanta Falcons,Los Angeles Rams
+18,Sat,2026-01-03,4:30PM,Tampa Bay Buccaneers,,Carolina Panthers,boxscore,16,14,338,1,285,3,Tampa Bay Buccaneers,Carolina Panthers
+18,Sat,2026-01-03,8:00PM,Seattle Seahawks,@,San Francisco 49ers,boxscore,13,3,361,0,173,1,San Francisco 49ers,Seattle Seahawks
+18,Sun,2026-01-04,1:00PM,Atlanta Falcons,,New Orleans Saints,boxscore,19,17,208,1,340,2,Atlanta Falcons,New Orleans Saints
+18,Sun,2026-01-04,1:00PM,Cleveland Browns,@,Cincinnati Bengals,boxscore,20,18,200,1,364,2,Cincinnati Bengals,Cleveland Browns
+18,Sun,2026-01-04,1:00PM,Houston Texans,,Indianapolis Colts,boxscore,38,30,339,0,354,3,Houston Texans,Indianapolis Colts
+18,Sun,2026-01-04,1:00PM,New York Giants,,Dallas Cowboys,boxscore,34,17,380,1,286,2,New York Giants,Dallas Cowboys
+18,Sun,2026-01-04,1:00PM,Minnesota Vikings,,Green Bay Packers,boxscore,16,3,363,1,121,0,Minnesota Vikings,Green Bay Packers
+18,Sun,2026-01-04,1:00PM,Jacksonville Jaguars,,Tennessee Titans,boxscore,41,7,319,0,194,1,Jacksonville Jaguars,Tennessee Titans
+18,Sun,2026-01-04,4:25PM,Buffalo Bills,,New York Jets,boxscore,35,8,470,0,122,0,Buffalo Bills,New York Jets
+18,Sun,2026-01-04,4:25PM,Detroit Lions,@,Chicago Bears,boxscore,19,16,433,1,270,1,Chicago Bears,Detroit Lions
+18,Sun,2026-01-04,4:25PM,Los Angeles Rams,,Arizona Cardinals,boxscore,37,20,395,0,317,2,Los Angeles Rams,Arizona Cardinals
+18,Sun,2026-01-04,4:25PM,Denver Broncos,,Los Angeles Chargers,boxscore,19,3,240,0,217,2,Denver Broncos,Los Angeles Chargers
+18,Sun,2026-01-04,4:25PM,Las Vegas Raiders,,Kansas City Chiefs,boxscore,14,12,204,2,168,2,Las Vegas Raiders,Kansas City Chiefs
+18,Sun,2026-01-04,4:25PM,New England Patriots,,Miami Dolphins,boxscore,38,10,457,0,180,2,New England Patriots,Miami Dolphins
+18,Sun,2026-01-04,4:25PM,Washington Commanders,@,Philadelphia Eagles,boxscore,24,17,274,2,307,1,Philadelphia Eagles,Washington Commanders
+18,Sun,2026-01-04,8:20PM,Pittsburgh Steelers,,Baltimore Ravens,boxscore,26,24,390,0,359,1,Pittsburgh Steelers,Baltimore Ravens
+19,Sat,2026-01-10,4:30PM,Los Angeles Rams,@,Carolina Panthers,boxscore,34,31,411,1,333,2,Carolina Panthers,Los Angeles Rams
+19,Sat,2026-01-10,8:00PM,Chicago Bears,,Green Bay Packers,boxscore,31,27,445,2,421,0,Chicago Bears,Green Bay Packers
+19,Sun,2026-01-11,1:00PM,Buffalo Bills,@,Jacksonville Jaguars,boxscore,27,24,340,1,359,2,Jacksonville Jaguars,Buffalo Bills
+19,Sun,2026-01-11,4:30PM,San Francisco 49ers,@,Philadelphia Eagles,boxscore,23,19,361,2,307,0,Philadelphia Eagles,San Francisco 49ers
+19,Sun,2026-01-11,8:15PM,New England Patriots,,Los Angeles Chargers,boxscore,16,3,381,2,207,1,New England Patriots,Los Angeles Chargers
+19,Mon,2026-01-12,8:15PM,Houston Texans,@,Pittsburgh Steelers,boxscore,30,6,408,3,175,2,Pittsburgh Steelers,Houston Texans
+20,Sat,2026-01-17,4:30PM,Denver Broncos,,Buffalo Bills,boxscore,33,30,349,1,449,5,Denver Broncos,Buffalo Bills
+20,Sat,2026-01-17,8:00PM,Seattle Seahawks,,San Francisco 49ers,boxscore,41,6,281,0,236,3,Seattle Seahawks,San Francisco 49ers
+20,Sun,2026-01-18,3:00PM,New England Patriots,,Houston Texans,boxscore,28,16,248,3,241,5,New England Patriots,Houston Texans
+20,Sun,2026-01-18,6:30PM,Los Angeles Rams,@,Chicago Bears,boxscore,20,17,340,0,417,3,Chicago Bears,Los Angeles Rams
+21,Sun,2026-01-25,3:00PM,New England Patriots,@,Denver Broncos,boxscore,10,7,206,0,181,2,Denver Broncos,New England Patriots
+21,Sun,2026-01-25,6:30PM,Seattle Seahawks,,Los Angeles Rams,boxscore,31,27,396,0,479,1,Seattle Seahawks,Los Angeles Rams
+22,Sun,2026-02-08,6:30PM,Seattle Seahawks,N,New England Patriots,boxscore,29,13,335,0,331,3,Seattle Seahawks,New England Patriots

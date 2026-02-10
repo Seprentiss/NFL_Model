@@ -11,9 +11,9 @@ import os
 import glob
 
 player_season = '2025'
-player_week = '8'
+player_week = '20'
 ratings_season = '2025'
-ratings_week = '8'
+ratings_week = '20'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def create_master_predictions(folder_path, file_type="csv"):
@@ -284,7 +284,7 @@ def create_player_card(player):
                 dbc.Col(
                     html.Div([
                         html.P(f"Total EPA: {round(player['Total EPA'],2)}", className="mb-1"),
-                        html.P(f"EPA per Play: {round(player['EPA per Play ( all offense )'],2)}", className="mb-1"),
+                        html.P(f"EPA per Play: {round(player['EPA per Play ( all plays contributed )'],2)}", className="mb-1"),
                         html.P(f"WAR: {player['WAR']:.2f}", className="mb-1"),
                         html.P(f"PAAS: {player['PAAS']:.2f}", className="mb-1")
                     ]),
