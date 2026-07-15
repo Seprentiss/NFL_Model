@@ -11,9 +11,9 @@ import os
 import glob
 
 player_season = '2025'
-player_week = '20'
+player_week = '22'
 ratings_season = '2025'
-ratings_week = '20'
+ratings_week = '22'
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def create_master_predictions(folder_path, file_type="csv"):
@@ -51,7 +51,7 @@ def create_master_predictions(folder_path, file_type="csv"):
     print(f"Master file created with {len(master_df)} rows.")
     return master_df
 
-create_master_predictions("2025_Weekly_Predictions", file_type="csv")
+create_master_predictions(f"{ratings_season}_Weekly_Predictions", file_type="csv")
 # ---------------------------
 # Config
 # ---------------------------

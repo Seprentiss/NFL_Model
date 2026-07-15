@@ -85,3 +85,5 @@ for i in range(1,23):
         games+=1
 print(f"Vegas RMSE: {np.sqrt(vegas_rmse/games)} - Model RMSE: {np.sqrt(model_rmse/games)}")
 print(wins,loses,pushes,equal_spread_no_bet)
+
+

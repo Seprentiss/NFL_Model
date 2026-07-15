@@ -241,9 +241,10 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
     }
 
 
-season = 2025
+season = 2026
 
 schedule_data = pd.read_csv(f"Data/NFL_SCHEDULE_{season}.csv")
+
 url = f'https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season-1}.csv'
 
 data = pd.read_csv(url, low_memory=True)
@@ -254,7 +255,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [22]
+weeks = [1]
 results = []
 
 Total_Wins = 0
@@ -325,7 +326,7 @@ for week in weeks:
 
         results.append(combined_result)
 
-    save_to_csv(f"2025_Weekly_Predictions/Week_{week}_Predictions_Full_Season.csv", results)
+    save_to_csv(f"2026_Weekly_Predictions/Week_{week}_Predictions_Full_Season.csv", results)
 
     #     if (home_net > away_net):
     #         if home_team == main.getTeamAbv(week_data["Winner/tie"].iloc[i]):

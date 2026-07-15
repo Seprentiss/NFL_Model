@@ -6,6 +6,9 @@ import time
 import polars as pl
 import pandas as pd
 import numpy as np
+import requests
+import time
+from curl_cffi import requests as cf_requests
 
 pd.options.mode.chained_assignment = None
 
@@ -738,8 +741,43 @@ def Player_Stats(num_of_off_plays, pass_stats, run_stats, week=2, season=2023):
     te_data.to_csv(f"Player Stats/{season}/{week-1}/te_data.csv", index=False)
 
 
+# def createNflScheduleData(season):
+#     data = pd.read_html(f"https://www.pro-football-reference.com/years/{season}/games.htm#all_games")[0]
+#
+#     if "HomeTm" in data.columns and "VisTm" in data.columns:
+#         data.to_csv(f"Data/NFL_SCHEDULE_{season}.csv", index=False)
+#     else:
+#         data["HomeTm"] = ""
+#         data["VisTm"] = ""
+#         for i in range(len(data)):
+#             if data['Unnamed: 5'].iloc[i] == "@":
+#                 data['HomeTm'].iloc[i] = data['Loser/tie'].iloc[i]
+#                 data['VisTm'].iloc[i] = data['Winner/tie'].iloc[i]
+#             else:
+#                 data['HomeTm'].iloc[i] = data['Winner/tie'].iloc[i]
+#                 data['VisTm'].iloc[i] = data['Loser/tie'].iloc[i]
+#
+#             if data["Week"].iloc[i] == "WildCard":
+#                 data["Week"].iloc[i] = 19
+#             if data["Week"].iloc[i] == "Division":
+#                 data["Week"].iloc[i] = 20
+#             if data["Week"].iloc[i] == "ConfChamp":
+#                 data["Week"].iloc[i] = 21
+#             if data["Week"].iloc[i] == "SuperBowl":
+#                 data["Week"].iloc[i] = 22
+#
+#         data = data[(data['Date'] != "Playoffs") & (data['Week'] != "Week")]
+#         data.to_csv(f"Data/NFL_SCHEDULE_{season}.csv", index=False)
+
 def createNflScheduleData(season):
-    data = pd.read_html(f"https://www.pro-football-reference.com/years/{season}/games.htm")[0]
+    # url = f"https://www.pro-football-reference.com/years/{season}/games.htm"
+    #
+    # response = cf_requests.get(url, impersonate="chrome124")
+    # response.raise_for_status()
+
+    # data = pd.read_html(response.text)[0]
+
+    data = pd.read_csv(f'Data/NFL_SCHEDULE_{season}_Download.csv')
 
     if "HomeTm" in data.columns and "VisTm" in data.columns:
         data.to_csv(f"Data/NFL_SCHEDULE_{season}.csv", index=False)
@@ -772,14 +810,14 @@ if __name__ == '__main__':
 
     full_start = time.time()
 
-    for season in [2025]:
+    for season in [2026]:
         createNflScheduleData(season)
 
         url = f'https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.csv'
 
         data = pd.read_csv(url, low_memory=True)
 
-        for week in range(23,24):
+        for week in range(1,2):
 
             print("Adjusting Team Stats...")
 

@@ -3,7 +3,7 @@ import numpy as np
 import requests
 
 
-week = 22
+week = 1
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
@@ -44,4 +44,4 @@ df = df[~df['Spread'].str.startswith(('u', 'o'))]
 
 print(df)
 
-df[["Team","Spread"]].to_csv(f"2025 Vegas Lines/Vegas_Lines_Week_{week}.csv",index=False)
+df[["Team","Spread"]].to_csv(f"2026 Vegas Lines/Vegas_Lines_Week_{week}.csv",index=False)
