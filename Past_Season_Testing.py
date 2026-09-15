@@ -162,7 +162,16 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
 
     combined_samples = np.rint((rounded_samples * .35 + vegas_mean * .65))
 
+    ml_samples = ((weighted_samples * .35 + vegas_mean * .65))
+
     mean = np.mean(combined_samples)
+
+    home_win_prob = np.mean(ml_samples > 0)
+    away_win_prob = np.mean(ml_samples < 0)
+    tie_prob = np.mean(ml_samples == 0)
+
+    print(
+        f"{home_team} Win Prob: {home_win_prob*100:.1f}% | {away_team} Win Prob: {away_win_prob*100:.1f}% | Tie Prob: {tie_prob*100:.1f}%")
 
     cpev = pd.read_excel("Cover Prob EV.xlsx", engine="openpyxl")
 
@@ -237,7 +246,10 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
         "Home Team Vegas Spread": -1*vegas_mean,
         "Expected Value (%)": ev[2],
         "Expected Value Team": ev[1],
-        "Home Team Spread Std": np.std(combined_samples)
+        "Home Team Spread Std": np.std(combined_samples),
+        "Home Team Win %": home_win_prob,
+        "Away Team Win %": away_win_prob,
+
     }
 
 
@@ -307,7 +319,6 @@ for week in weeks:
 
         # QB_adj = {}
         QB_adj = {
-            # "DEN":-0.0315589744,
                   }
         if home_team in QB_adj:
             home_net+= QB_adj[home_team]
@@ -326,7 +337,7 @@ for week in weeks:
 
         results.append(combined_result)
 
-    save_to_csv(f"2026_Weekly_Predictions/Week_{week}_Predictions_Full_Season.csv", results)
+    save_to_csv(f"{season}_Weekly_Predictions/Week_{week}_Predictions_Full_Season.csv", results)
 
     #     if (home_net > away_net):
     #         if home_team == main.getTeamAbv(week_data["Winner/tie"].iloc[i]):
