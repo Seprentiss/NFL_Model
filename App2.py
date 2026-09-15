@@ -492,9 +492,9 @@ def team_badge(team, dark_text=False):
 def metric_box(label, value, sub=None, accent=ELECTRIC):
     return html.Div([
         html.Div(label, style={"fontSize": "11px", "fontWeight": "700", "color": MUTED, "textTransform": "uppercase", "letterSpacing": ".08em"}),
-        html.Div(value, style={"fontSize": "24px", "fontWeight": "800", "color": TEXT, "lineHeight": "1.15", "marginTop": "4px"}),
+        html.Div(value, className="mobile-metric-value", style={"fontSize": "24px", "fontWeight": "800", "color": TEXT, "lineHeight": "1.15", "marginTop": "4px"}),
         html.Div(sub or "", style={"fontSize": "12px", "color": accent, "fontWeight": "600", "marginTop": "3px"}),
-    ], style={"padding": "16px 18px", "borderLeft": f"3px solid {accent}"})
+    ], className="mobile-metric", style={"padding": "16px 18px", "borderLeft": f"3px solid {accent}"})
 
 
 def page_shell(children):
@@ -508,7 +508,7 @@ def top_nav(active="games"):
     links = [("games", "Games", "/"), ("power", "Power Ratings", "/power-rankings"),
              ("players", "Players", "/player-rankings"), ("glossary", "Methodology", "/glossary")]
     return html.Div([
-        html.Div([
+        html.Div(className="mobile-brand", children=[
             html.A("POWER", href="/", style={
                 "textDecoration": "none", "fontSize": "19px", "fontWeight": "900",
                 "letterSpacing": ".08em", "color": TEXT,
@@ -519,8 +519,8 @@ def top_nav(active="games"):
                 "textShadow": f"0 0 12px {rgba_from_hex(ELECTRIC, .55)}",
             }),
         ]),
-        html.Div([
-            html.A(label, href=href, style={
+        html.Div(className="mobile-nav", children=[
+            html.A(label, href=href, className="mobile-nav-link", style={
                 "textDecoration": "none", "padding": "9px 14px", "borderRadius": "8px",
                 "fontSize": "13px", "fontWeight": "700",
                 "color": "#ffffff" if key == active else MUTED,
@@ -528,7 +528,7 @@ def top_nav(active="games"):
                 "boxShadow": f"0 0 18px {rgba_from_hex(ELECTRIC, .45)}" if key == active else "none",
             }) for key, label, href in links
         ], style={"display": "flex", "gap": "3px", "alignItems": "center"}),
-    ], style={
+    ], className="mobile-header", style={
         "maxWidth": "1180px", "margin": "0 auto", "height": "68px", "padding": "0 18px",
         "display": "flex", "alignItems": "center", "justifyContent": "space-between",
         "borderBottom": f"1px solid {BORDER}",
@@ -546,11 +546,11 @@ def hero(title, eyebrow, description):
             "fontSize": "40px", "lineHeight": "1.08", "letterSpacing": "-.03em",
             "fontWeight": "850", "margin": "0 0 12px", "color": TEXT,
         }),
-        html.P(description, style={
+        html.P(description, className="mobile-hero-description", style={
             "maxWidth": "700px", "fontSize": "15px", "lineHeight": "1.65",
             "color": MUTED, "margin": "0",
         }),
-    ], style={
+    ], className="mobile-hero", style={
         "padding": "42px 0 26px",
         "borderBottom": f"1px solid {BORDER}",
         "marginBottom": "26px",
@@ -584,7 +584,7 @@ def section_heading(title, kicker=None, right=None):
             html.H2(title, style={"fontSize": "21px", "fontWeight": "800", "letterSpacing": "-.02em", "margin": "0", "color": TEXT}),
         ]),
         right,
-    ], style={"display": "flex", "alignItems": "end", "justifyContent": "space-between", "marginBottom": "14px"})
+    ], className="mobile-section-heading", style={"display": "flex", "alignItems": "end", "justifyContent": "space-between", "marginBottom": "14px"})
 
 
 def make_strength_chart(home_mean, home_var, away_mean, away_var, hfa, home_team, away_team):
@@ -648,7 +648,7 @@ def make_game_card(row):
                 html.Div([team_badge(away), html.Span(away, style={"fontWeight": "800", "fontSize": "15px", "marginLeft": "9px", "color": TEXT})], style={"display": "flex", "alignItems": "center"}),
                 html.Div("@", style={"color": MUTED, "fontWeight": "700", "fontSize": "12px", "margin": "0 10px"}),
                 html.Div([team_badge(home), html.Span(home, style={"fontWeight": "800", "fontSize": "15px", "marginLeft": "9px", "color": TEXT})], style={"display": "flex", "alignItems": "center"}),
-            ], style={"display": "flex", "alignItems": "center", "marginBottom": "16px"}),
+            ], className="mobile-game-teams", style={"display": "flex", "alignItems": "center", "marginBottom": "16px"}),
             html.Div([
                 html.Div([html.Div("WIN PROBABILITY", style={"fontSize": "9px", "fontWeight": "800", "color": MUTED, "letterSpacing": ".08em"}),
                          html.Div(f"{row['Away Win %']:.1f}%  /  {row['Home Win %']:.1f}%", style={"fontSize": "19px", "fontWeight": "800", "marginTop": "3px", "color": TEXT})]),
@@ -656,17 +656,17 @@ def make_game_card(row):
                          html.Div(f"{model_spread:+.1f}", style={"fontSize": "19px", "fontWeight": "800", "marginTop": "3px", "color": TEXT})]),
                 html.Div([html.Div("MARKET", style={"fontSize": "9px", "fontWeight": "800", "color": MUTED, "letterSpacing": ".08em"}),
                          html.Div(f"{vegas_spread:+.1f}", style={"fontSize": "19px", "fontWeight": "800", "marginTop": "3px", "color": TEXT})]),
-            ], style={"display": "grid", "gridTemplateColumns": "1.3fr 1fr 1fr", "gap": "16px"}),
+            ], className="mobile-game-stats", style={"display": "grid", "gridTemplateColumns": "1.3fr 1fr 1fr", "gap": "16px"}),
             html.Div([
                 html.Span(f"EV {ev:+.1f}%", style={"fontWeight": "800", "color": GREEN if positive else RED}),
                 html.Span(f"{ev_team}", style={"color": MUTED, "marginLeft": "8px"}),
             ], style={"fontSize": "12px", "paddingTop": "14px", "marginTop": "14px", "borderTop": f"1px solid {BORDER}"}),
-        ], style={"flex": "1", "minWidth": "330px"}),
+        ], className="mobile-game-main", style={"flex": "1", "minWidth": "330px"}),
         html.Div([
             html.Div("MODEL DISTRIBUTION", style={"fontSize": "9px", "fontWeight": "800", "letterSpacing": ".08em", "color": MUTED, "marginBottom": "2px"}),
             make_strength_chart(row["Home Team Str Mean"], row["Home Team Str Var"], row["Away Team Str Mean"], row["Away Team Str Var"], row["HFA"], home, away),
-        ], style={"width": "39%", "minWidth": "300px", "borderLeft": f"1px solid {BORDER}", "paddingLeft": "20px"}),
-    ], style={
+        ], className="mobile-game-chart", style={"width": "39%", "minWidth": "300px", "borderLeft": f"1px solid {BORDER}", "paddingLeft": "20px"}),
+    ], className="mobile-game-card", style={
         "display": "flex", "gap": "24px", "padding": "20px", "background": CARD,
         "border": f"1px solid {GREEN if positive else BORDER}",
         "borderLeft": f"4px solid {GREEN if positive else ELECTRIC}",
@@ -681,7 +681,7 @@ def filter_bar():
         html.Div([html.Div("TEAMS", style={"fontSize": "10px", "fontWeight": "800", "color": MUTED, "marginBottom": "5px"}), dcc.Dropdown(id="team-dd", options=[{"label": t, "value": t} for t in all_teams], multi=True, placeholder="All teams", className="clean-dropdown")], style={"minWidth": "190px", "flex": "1"}),
         html.Div([html.Div("SORT", style={"fontSize": "10px", "fontWeight": "800", "color": MUTED, "marginBottom": "5px"}), dcc.Dropdown(id="sort-dd", options=[{"label": "Expected value", "value": "ev"}, {"label": "Win probability gap", "value": "win_diff"}], value="ev", clearable=False, className="clean-dropdown")], style={"minWidth": "180px", "flex": "0 0 180px"}),
         html.Div([html.Div("", style={"height": "15px"}), dcc.Checklist(id="ev-only-toggle", options=[{"label": " +EV only", "value": 1}], value=[], inputClassName="ev-check", labelStyle={"fontSize": "12px", "fontWeight": "700", "color": TEXT, "whiteSpace": "nowrap"})], style={"display": "flex", "alignItems": "center"}),
-    ], style={"display": "flex", "gap": "12px", "alignItems": "end", "padding": "13px", "background": CARD, "border": f"1px solid {BORDER}", "borderRadius": "10px", "marginBottom": "18px"})
+    ], className="mobile-filter-bar", style={"display": "flex", "gap": "12px", "alignItems": "end", "padding": "13px", "background": CARD, "border": f"1px solid {BORDER}", "borderRadius": "10px", "marginBottom": "18px"})
 
 
 def player_table(df_pos):
@@ -698,10 +698,11 @@ def player_table(df_pos):
             html.Div(f"{r['WAR']:.2f}", className="player-num strong-num"),
             html.Div(f"{r['PAAS']:.1f}", className="player-num"),
         ], className="player-row"))
-    return html.Div([
+    table = html.Div([
         html.Div([html.Div("#", style={"width":"34px"}), html.Div("PLAYER", style={"flex":"1"}), html.Div("GP", className="player-head"), html.Div("TOTAL EPA", className="player-head"), html.Div("EPA/PLAY", className="player-head"), html.Div("WAR", className="player-head"), html.Div("PAAS", className="player-head")], className="player-row player-header"),
         *rows,
     ], style={"background": CARD, "border": f"1px solid {BORDER}", "borderRadius": "10px", "overflow": "hidden"})
+    return html.Div(table, className="player-table-scroll")
 
 
 def make_power_rankings_cards(power_df, week=None, filter_teams=None):
@@ -725,7 +726,7 @@ def make_power_rankings_cards(power_df, week=None, filter_teams=None):
         html.Div("TEAM", style={"flex": "1"}),
         html.Div("POWER RATING", style={"width": "150px", "textAlign": "right"}),
         html.Div("WINS EQUIVALENT", style={"width": "150px", "textAlign": "right"}),
-    ], style={
+    ], className="mobile-power-header", style={
         "display": "flex", "alignItems": "center", "padding": "12px 20px",
         "color": MUTED, "fontSize": "9px", "fontWeight": "800", "letterSpacing": ".09em",
         "borderBottom": f"1px solid {BORDER}", "background": CARD_ALT,
@@ -740,26 +741,26 @@ def make_power_rankings_cards(power_df, week=None, filter_teams=None):
         rank_style = {"color": ELECTRIC_BRIGHT if rank <= 5 else MUTED, "fontWeight": "900", "fontSize": "15px"}
 
         rows.append(html.Div([
-            html.Div(str(rank), style={"width": "48px", **rank_style}),
+            html.Div(str(rank), className="mobile-power-rank", style={"width": "48px", **rank_style}),
             html.Div([
                 team_badge(team),
                 html.Div(team, style={"fontWeight": "850", "fontSize": "14px", "marginLeft": "11px", "color": TEXT}),
-            ], style={"flex": "1", "display": "flex", "alignItems": "center"}),
-            html.Div(f"{rating:+.3f}", style={
+            ], className="mobile-power-team", style={"flex": "1", "display": "flex", "alignItems": "center"}),
+            html.Div(f"{rating:+.3f}", className="mobile-power-rating", style={
                 "width": "150px", "textAlign": "right", "fontSize": "16px", "fontWeight": "900",
                 "fontVariantNumeric": "tabular-nums", "color": TEXT,
             }),
-            html.Div(f"{wins:.1f}", style={
+            html.Div(f"{wins:.1f}", className="mobile-power-wins", style={
                 "width": "150px", "textAlign": "right", "fontSize": "15px", "fontWeight": "850",
                 "fontVariantNumeric": "tabular-nums", "color": TEXT,
             }),
-        ], className="power-ranking-row", style={
+        ], className="power-ranking-row mobile-power-row", style={
             "position": "relative", "display": "flex", "alignItems": "center", "minHeight": "58px",
             "padding": "0 20px", "borderBottom": f"1px solid {BORDER}",
             "background": CARD if rank % 2 else CARD_ALT,
         }))
 
-    return html.Div([header, *rows], className="power-list", style={
+    return html.Div([header, *rows], className="power-list mobile-power-list", style={
         "background": CARD, "border": f"1px solid {BORDER}", "borderRadius": "12px", "overflow": "visible",
         "boxShadow": f"0 16px 40px {rgba_from_hex('#000000', .45)}",
     })
@@ -874,6 +875,277 @@ app.index_string = """
       a:hover { opacity:.82; }
       .power-ranking-row { transition: background .15s ease; }
       .power-ranking-row:hover { background:""" + rgba_from_hex(ELECTRIC, .10) + """ !important; }
+
+      /* ---------------------------------------------------------
+         Mobile / phone layout
+         --------------------------------------------------------- */
+      @media (max-width: 700px) {
+        html, body {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+
+        body {
+          -webkit-text-size-adjust: 100%;
+        }
+
+        /* Keep the brand and navigation usable without squeezing them. */
+        .mobile-nav {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+        .mobile-nav::-webkit-scrollbar { display: none; }
+
+        /* Dash dropdowns are easier to tap on a phone. */
+        .clean-dropdown .Select-control {
+          min-height: 44px !important;
+          border-radius: 9px !important;
+        }
+        .clean-dropdown .Select-placeholder,
+        .clean-dropdown .Select-value-label {
+          font-size: 13px !important;
+        }
+
+        /* Player tables scroll horizontally instead of becoming unreadable. */
+        .player-table-scroll {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          border-radius: 10px;
+        }
+        .player-table-scroll > div {
+          min-width: 650px;
+        }
+
+        .player-row {
+          min-height: 58px;
+          padding: 0 12px;
+        }
+
+        /* Don't rely on hover for important information on touch screens. */
+        .power-ranking-row:hover {
+          background: inherit !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        /* Page gutters */
+        .mobile-main {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
+
+        /* Compact mobile header */
+        .mobile-header {
+          height: auto !important;
+          min-height: 58px !important;
+          padding: 8px 12px !important;
+          gap: 8px;
+          align-items: center !important;
+        }
+
+        .mobile-brand {
+          flex: 0 0 auto;
+        }
+
+        .mobile-nav {
+          flex: 1 1 auto;
+          justify-content: flex-start !important;
+          gap: 3px !important;
+          padding-bottom: 2px;
+        }
+
+        .mobile-nav a {
+          flex: 0 0 auto;
+          padding: 8px 10px !important;
+          font-size: 11px !important;
+          white-space: nowrap;
+        }
+
+        /* Smaller hero with less vertical dead space. */
+        .mobile-hero {
+          padding: 26px 0 18px !important;
+          margin-bottom: 18px !important;
+        }
+
+        .mobile-hero h1 {
+          font-size: 30px !important;
+          line-height: 1.08 !important;
+          margin-bottom: 9px !important;
+        }
+
+        .mobile-hero p {
+          font-size: 13px !important;
+          line-height: 1.55 !important;
+        }
+
+        /* Four desktop metrics become a clean 2x2 phone grid. */
+        .mobile-metrics {
+          grid-template-columns: repeat(2, 1fr) !important;
+          margin-bottom: 20px !important;
+        }
+
+        .mobile-metric {
+          padding: 12px 13px !important;
+        }
+
+        .mobile-metric-value {
+          font-size: 20px !important;
+        }
+
+        /* Filters stack vertically and use full-width touch targets. */
+        .mobile-filter-bar,
+        .mobile-power-filters {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 9px !important;
+          padding: 11px !important;
+        }
+
+        .mobile-filter-bar > div,
+        .mobile-power-filters > div {
+          width: 100% !important;
+          min-width: 0 !important;
+          flex: 1 1 auto !important;
+        }
+
+        .mobile-filter-bar .ev-mobile {
+          justify-content: flex-start !important;
+          min-height: 42px;
+        }
+
+        /* Game cards become one-column cards. */
+        .mobile-game-card {
+          flex-direction: column !important;
+          gap: 14px !important;
+          padding: 14px !important;
+        }
+
+        .mobile-game-main {
+          width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        .mobile-game-chart {
+          width: 100% !important;
+          min-width: 0 !important;
+          border-left: none !important;
+          border-top: 1px solid """ + BORDER + """;
+          padding-left: 0 !important;
+          padding-top: 12px;
+        }
+
+        .mobile-game-teams {
+          flex-wrap: wrap !important;
+          row-gap: 8px;
+        }
+
+        .mobile-game-teams .team-name {
+          font-size: 14px !important;
+        }
+
+        .mobile-game-stats {
+          grid-template-columns: 1.25fr 1fr 1fr !important;
+          gap: 8px !important;
+        }
+
+        .mobile-game-stats .stat-value {
+          font-size: 16px !important;
+        }
+
+        /* Power rankings: turn the desktop table into compact cards. */
+        .mobile-power-header {
+          display: none !important;
+        }
+
+        .mobile-power-row {
+          display: grid !important;
+          grid-template-columns: 30px minmax(0, 1fr) auto auto !important;
+          gap: 8px !important;
+          min-height: 62px !important;
+          padding: 0 12px !important;
+        }
+
+        .mobile-power-rank {
+          width: auto !important;
+        }
+
+        .mobile-power-team {
+          min-width: 0 !important;
+        }
+
+        .mobile-power-team-name {
+          font-size: 13px !important;
+        }
+
+        .mobile-power-rating,
+        .mobile-power-wins {
+          width: auto !important;
+          min-width: 55px !important;
+          font-size: 14px !important;
+        }
+
+        /* Keep the two numeric columns readable on small screens. */
+        .mobile-power-list {
+          overflow: hidden !important;
+        }
+
+        /* Position tabs should span the screen and remain easy to tap. */
+        .mobile-position-tabs {
+          width: 100% !important;
+        }
+
+        .mobile-position-tabs .tab {
+          padding: 10px 8px !important;
+          font-size: 11px !important;
+        }
+
+        /* Glossary cards use tighter gutters. */
+        .mobile-glossary {
+          padding-left: 14px !important;
+          padding-right: 14px !important;
+        }
+
+        .mobile-section-heading {
+          align-items: flex-start !important;
+          flex-direction: column !important;
+          gap: 5px;
+        }
+
+        /* Graph legend gets more room on narrow screens. */
+        .mobile-game-chart .js-plotly-plot {
+          max-width: 100%;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .mobile-brand span {
+          display: none !important;
+        }
+
+        .mobile-nav a {
+          padding: 8px 8px !important;
+          font-size: 10px !important;
+        }
+
+        .mobile-game-stats {
+          grid-template-columns: 1fr 1fr !important;
+        }
+
+        .mobile-game-stats > div:first-child {
+          grid-column: 1 / -1;
+        }
+
+        .mobile-power-row {
+          grid-template-columns: 26px minmax(0, 1fr) auto !important;
+        }
+
+        .mobile-power-wins {
+          display: none !important;
+        }
+      }
     </style>
 </head>
 <body>
@@ -906,7 +1178,7 @@ def home_page():
                 html.H3("Model notes", style={"fontSize": "16px", "fontWeight": "800", "marginBottom": "7px", "color": TEXT}),
                 html.P("Positive-EV games are highlighted. The distribution chart shows the model's estimated team-strength outcomes after applying home-field advantage.", style={"color": MUTED, "fontSize": "12px", "lineHeight": "1.6", "margin": 0}),
             ], style={"margin": "28px 0 50px", "padding": "18px", "borderTop": f"1px solid {BORDER}"})
-        ], style={"maxWidth": "1180px", "margin": "0 auto", "padding": "0 18px"})
+        ], className="mobile-main", style={"maxWidth": "1180px", "margin": "0 auto", "padding": "0 18px"})
     ])
 
 
@@ -916,13 +1188,13 @@ def power_page():
         top_nav("power"),
         html.Main([
             hero("Power ratings", "TEAM STRENGTH", "Team name, power rating, and equivalent wins."),
-            html.Div([
+            html.Div(className="mobile-power-filters", children=[
                 html.Div([html.Div("WEEK", style={"fontSize": "10px", "fontWeight": "800", "color": MUTED, "marginBottom": "5px"}), dcc.Dropdown(id="power-week-dd", options=[{"label": int(w), "value": int(w)} for w in weeks], value=latest, clearable=False, className="clean-dropdown")], style={"width": "150px"}),
                 html.Div([html.Div("TEAMS", style={"fontSize": "10px", "fontWeight": "800", "color": MUTED, "marginBottom": "5px"}), dcc.Dropdown(id="power-team-dd", options=[{"label": t, "value": t} for t in all_teams], multi=True, placeholder="All teams", className="clean-dropdown")], style={"flex": "1"}),
             ], style={"display": "flex", "gap": "12px", "padding": "13px", "background": CARD, "border": f"1px solid {BORDER}", "borderRadius": "10px", "marginBottom": "18px"}),
             section_heading("NFL power rankings", "TEAM RATINGS", "Rating is the model score without accounting for QB adjustments"),
             html.Div(id="power-rankings-cards"),
-        ], style={"maxWidth": "1180px", "margin": "0 auto", "padding": "0 18px 50px"})
+        ], className="mobile-main", style={"maxWidth": "1180px", "margin": "0 auto", "padding": "0 18px 50px"})
     ])
 
 
@@ -932,7 +1204,7 @@ def player_page():
         html.Main([
             hero("Player rankings", "PLAYER VALUE","A leaderboard of EPA, WAR, and PAAS by position."),
             stat_legend(),
-            dcc.Tabs(id="position-tabs", value="QB", children=[
+            dcc.Tabs(id="position-tabs", className="mobile-position-tabs", value="QB", children=[
                 dcc.Tab(
                     label=pos, value=pos,
                     style={"padding": "11px 22px", "fontWeight": "700", "fontSize": "12px", "border": f"1px solid {BORDER}", "background": CARD, "color": MUTED},
@@ -940,7 +1212,7 @@ def player_page():
                 ) for pos in ["QB", "RB", "WR", "TE"]
             ], style={"marginBottom": "14px"}),
             html.Div(id="tab-content"),
-        ], style={"maxWidth": "1180px", "margin": "0 auto", "padding": "0 18px 50px"})
+        ], className="mobile-main", style={"maxWidth": "1180px", "margin": "0 auto", "padding": "0 18px 50px"})
     ])
 
 
