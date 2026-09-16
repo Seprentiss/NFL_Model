@@ -161,14 +161,17 @@ def CalcSpread(data, last_season_data, week, season, home_team, away_team, home_
     vegas_mean = float(vegas_data[vegas_data["Team"] == home_team]["Spread"].iloc[0]) * -1
 
     combined_samples = np.rint((rounded_samples * .35 + vegas_mean * .65))
-
-    ml_samples = ((weighted_samples * .35 + vegas_mean * .65))
-
     mean = np.mean(combined_samples)
 
-    home_win_prob = np.mean(ml_samples > 0)
-    away_win_prob = np.mean(ml_samples < 0)
-    tie_prob = np.mean(ml_samples == 0)
+    ml_mean = ( vegas_mean/153*.65 + np.mean(weighted_samples)/153*.35)
+    sd = math.sqrt((home_team_variance + away_team_variance)*.35)
+    z = (0 - ml_mean) / sd
+    home_win_prob = (1 - st.norm.cdf(z))
+
+    away_win_prob = 1 - home_win_prob
+
+    tie_prob = 1 - home_win_prob - away_win_prob
+
 
     print(
         f"{home_team} Win Prob: {home_win_prob*100:.1f}% | {away_team} Win Prob: {away_win_prob*100:.1f}% | Tie Prob: {tie_prob*100:.1f}%")
@@ -267,7 +270,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [1]
+weeks = [2]
 results = []
 
 Total_Wins = 0
@@ -318,7 +321,8 @@ for week in weeks:
             away_net = pd.read_csv(f"Team Stats/{season}/{week - 1}/Net_Ratings.csv")[away_team].iloc[0]
 
         # QB_adj = {}
-        QB_adj = {
+        QB_adj = {"SEA":-0.0940794872,
+                  "MIN": -0.0217094406
                   }
         if home_team in QB_adj:
             home_net+= QB_adj[home_team]

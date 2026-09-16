@@ -10,10 +10,10 @@ from dash import html, dcc
 import os
 import glob
 
-player_season = '2025'
-player_week = '22'
+player_season = '2026'
+player_week = '1'
 ratings_season = '2026'
-ratings_week = '1'
+ratings_week = 2
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def create_master_predictions(folder_path, file_type="csv"):
@@ -84,7 +84,7 @@ if df["Expected Value (%)"].dtype == object:
 df["EV_Positive"] = df["Expected Value (%)"].fillna(0) > 0
 df["Spread Edge"] = abs(df["Home Team Projected Spread"]) - abs(df["Home Team Vegas Spread"])
 
-df["Win% Differential"] = (df["Home Win %"] - df["Away Win %"]).abs()
+df["Win% Differential"] = (df["Home Team Win %"] - df["Away Team Win %"]).abs()
 
 qb_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats",f"{player_season}",f"{player_week}","qb_data.csv"))
 rb_df = pd.read_csv(os.path.join(BASE_DIR, "Player Stats",f"{player_season}",f"{player_week}","rb_data.csv"))
@@ -651,7 +651,7 @@ def make_game_card(row):
             ], className="mobile-game-teams", style={"display": "flex", "alignItems": "center", "marginBottom": "16px"}),
             html.Div([
                 html.Div([html.Div("WIN PROBABILITY", style={"fontSize": "9px", "fontWeight": "800", "color": MUTED, "letterSpacing": ".08em"}),
-                         html.Div(f"{row['Away Win %']:.1f}%  /  {row['Home Win %']:.1f}%", style={"fontSize": "19px", "fontWeight": "800", "marginTop": "3px", "color": TEXT})]),
+                         html.Div(f"{round(row['Away Team Win %']*100,0):.1f}%  /  {round(row['Home Team Win %']*100,0):.1f}%", style={"fontSize": "19px", "fontWeight": "800", "marginTop": "3px", "color": TEXT})]),
                 html.Div([html.Div("MODEL SPREAD", style={"fontSize": "9px", "fontWeight": "800", "color": MUTED, "letterSpacing": ".08em"}),
                          html.Div(f"{model_spread:+.1f}", style={"fontSize": "19px", "fontWeight": "800", "marginTop": "3px", "color": TEXT})]),
                 html.Div([html.Div("MARKET", style={"fontSize": "9px", "fontWeight": "800", "color": MUTED, "letterSpacing": ".08em"}),
@@ -708,12 +708,13 @@ def player_table(df_pos):
 def make_power_rankings_cards(power_df, week=None, filter_teams=None):
     """Minimal, edgy power rankings board.
 
-    The visible row only ever shows team, power rating, and projected wins.
-    The 95% model range is computed but stays hidden inside a hover panel that
-    reveals on mouse-over, keeping the base view intentionally sparse.
+    The visible row shows team, power rating, wins equivalent, and how the
+    team's rank moved compared to the previous week (green up arrow / red
+    down arrow / neutral dash for no change or no prior week available).
     """
     if week is None:
         week = power_df["Week"].max()
+    week = int(week)
     d = power_df[power_df["Week"] == week].copy()
     if filter_teams:
         d = d[d["Team"].isin(filter_teams)]
@@ -721,8 +722,15 @@ def make_power_rankings_cards(power_df, week=None, filter_teams=None):
     if d.empty:
         return html.Div("No teams match the selected filter.", style={"padding": "30px", "color": MUTED, "textAlign": "center"})
 
+    prev_week = week - 1
+    prev_ranks = {}
+    if prev_week in power_df["Week"].values:
+        prev_d = power_df[power_df["Week"] == prev_week]
+        prev_ranks = dict(zip(prev_d["Team"], prev_d["Rank"]))
+
     header = html.Div([
         html.Div("#", style={"width": "48px"}),
+        html.Div("", className="mobile-power-move-head", style={"width": "56px"}),
         html.Div("TEAM", style={"flex": "1"}),
         html.Div("POWER RATING", style={"width": "150px", "textAlign": "right"}),
         html.Div("WINS EQUIVALENT", style={"width": "150px", "textAlign": "right"}),
@@ -740,8 +748,27 @@ def make_power_rankings_cards(power_df, week=None, filter_teams=None):
         wins = float(r["Wins"])
         rank_style = {"color": ELECTRIC_BRIGHT if rank <= 5 else MUTED, "fontWeight": "900", "fontSize": "15px"}
 
+        prev_rank = prev_ranks.get(team)
+        if prev_rank is None:
+            move_content = html.Span("–", style={"color": MUTED, "fontSize": "13px", "fontWeight": "700"})
+        else:
+            change = prev_rank - rank  # positive: rank number went down, i.e. team moved up
+            if change > 0:
+                move_content = html.Span([
+                    html.Span("▲", style={"marginRight": "3px"}),
+                    str(change),
+                ], style={"color": GREEN, "fontSize": "13px", "fontWeight": "800"})
+            elif change < 0:
+                move_content = html.Span([
+                    html.Span("▼", style={"marginRight": "3px"}),
+                    str(abs(change)),
+                ], style={"color": RED, "fontSize": "13px", "fontWeight": "800"})
+            else:
+                move_content = html.Span("–", style={"color": MUTED, "fontSize": "13px", "fontWeight": "700"})
+
         rows.append(html.Div([
             html.Div(str(rank), className="mobile-power-rank", style={"width": "48px", **rank_style}),
+            html.Div(move_content, className="mobile-power-move", style={"width": "56px", "textAlign": "left"}),
             html.Div([
                 team_badge(team),
                 html.Div(team, style={"fontWeight": "850", "fontSize": "14px", "marginLeft": "11px", "color": TEXT}),
@@ -1062,13 +1089,17 @@ app.index_string = """
 
         .mobile-power-row {
           display: grid !important;
-          grid-template-columns: 30px minmax(0, 1fr) auto auto !important;
+          grid-template-columns: 26px 34px minmax(0, 1fr) auto auto !important;
           gap: 8px !important;
           min-height: 62px !important;
           padding: 0 12px !important;
         }
 
         .mobile-power-rank {
+          width: auto !important;
+        }
+
+        .mobile-power-move {
           width: auto !important;
         }
 
@@ -1139,7 +1170,7 @@ app.index_string = """
         }
 
         .mobile-power-row {
-          grid-template-columns: 26px minmax(0, 1fr) auto !important;
+          grid-template-columns: 22px 30px minmax(0, 1fr) auto !important;
         }
 
         .mobile-power-wins {
@@ -1187,7 +1218,7 @@ def power_page():
     return page_shell([
         top_nav("power"),
         html.Main([
-            hero("Power ratings", "TEAM STRENGTH", "Team name, power rating, and equivalent wins."),
+            hero("Power ratings", "TEAM STRENGTH", "Team name, power rating, equivalent wins, and week-over-week movement."),
             html.Div(className="mobile-power-filters", children=[
                 html.Div([html.Div("WEEK", style={"fontSize": "10px", "fontWeight": "800", "color": MUTED, "marginBottom": "5px"}), dcc.Dropdown(id="power-week-dd", options=[{"label": int(w), "value": int(w)} for w in weeks], value=latest, clearable=False, className="clean-dropdown")], style={"width": "150px"}),
                 html.Div([html.Div("TEAMS", style={"fontSize": "10px", "fontWeight": "800", "color": MUTED, "marginBottom": "5px"}), dcc.Dropdown(id="power-team-dd", options=[{"label": t, "value": t} for t in all_teams], multi=True, placeholder="All teams", className="clean-dropdown")], style={"flex": "1"}),
