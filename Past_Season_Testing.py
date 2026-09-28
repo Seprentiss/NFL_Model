@@ -270,7 +270,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [3]
+weeks = [1]
 results = []
 
 Total_Wins = 0
