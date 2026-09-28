@@ -270,7 +270,7 @@ vegas = pd.read_csv(f"NFL Vegas Win Totals {season}.csv")
 
 print("data_loaded")
 
-weeks = [1]
+weeks = [3]
 results = []
 
 Total_Wins = 0
@@ -325,7 +325,7 @@ for week in weeks:
                   "MIN": 0.0079501554,
                   "WAS": -0.0405104463,
                   "NYG": -0.0328984127,
-                  "CHI": -0.0845117949,
+                  "CHI": -0.1118276923,
                   "SEA": 0.0239522792
                   }
         if home_team in QB_adj:
